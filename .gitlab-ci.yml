@@ -1,0 +1,16 @@
+image: nginx:latest
+
+stages:
+  - build-image
+  - deploy
+  
+docker build:
+  stage: build-image
+  script:
+  - docker rm paredros-creator-server-nodb
+  - docker build -t paredros-creator-server-nodb .
+  - docker images -a
+
+deploy:
+  stage: deploy
+  script: docker start paredros-creator-server-nodb
