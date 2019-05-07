@@ -10,7 +10,11 @@ docker build:
   - docker rm paredros-creator-server-nodb
   - docker build -t paredros-creator-server-nodb .
   - docker images -a
+  tags:
+  - deploy
 
 deploy:
   stage: deploy
   script: docker start paredros-creator-server-nodb
+  tags:
+  - deploy
