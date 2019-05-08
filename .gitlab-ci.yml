@@ -7,7 +7,7 @@ stages:
 docker build:
   stage: build-image
   script:
-  - docker build --name paredros -t paredros-creator-server-nodb .
+  - docker build -t paredros-creator-server-nodb .
   - docker images -a
   tags:
   - deploy
@@ -16,7 +16,7 @@ deploy:
   stage: deploy
   script: 
   - docker stop paredros
-  - docker run -p 80:80 paredros-creator-server-nodb
+  - docker run --name paredros -d -p 80:80 paredros-creator-server-nodb
   - docker system prune -a
   tags:
   - deploy
