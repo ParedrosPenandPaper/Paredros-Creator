@@ -15,8 +15,7 @@ docker build:
 deploy:
   stage: deploy
   script: 
-  - docker stop paredros
+  - docker stop --rm paredros
   - docker run --name paredros -d -p 80:80 paredros-creator-server-nodb
-  - docker system prune -a
   tags:
   - deploy
