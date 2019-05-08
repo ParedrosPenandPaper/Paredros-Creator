@@ -7,7 +7,7 @@ stages:
 docker build:
   stage: build-image
   script:
-  - docker build -t paredros-creator-server-nodb .
+  - docker build --rm -t paredros-creator-server-nodb .
   - docker images -a
   tags:
   - deploy
