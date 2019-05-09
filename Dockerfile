@@ -1,9 +1,9 @@
 FROM nginx:latest
 
-RUN rm -r /etc/nginx/conf.d
+RUN rm -r /etc/nginx/conf.d/default.conf
 
 COPY content /usr/share/nginx/html
 
-COPY conf.d /etc/nginx
+COPY conf/default.conf /etc/nginx/conf.d
 
 EXPOSE 80
