@@ -1,5 +1,5 @@
 <template>
-    <div class="editor-container">
+    <div>
         <meta-panel :meta="data.meta"></meta-panel>
         <adventure-panel :adventure="data.adventure"></adventure-panel>
     </div>
@@ -19,11 +19,5 @@
         }
     }
 </script>
-
 <style>
-    .editor-container{
-        border: 1px solid black;
-        margin: 5px;
-        padding: 5px;
-    }
 </style>

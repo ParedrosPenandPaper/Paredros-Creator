@@ -14,9 +14,9 @@
 
 <style>
     .meta-panel-container{
-        border: 1px solid black;
-        margin: 5px;
+        border: 1px solid gray;
         padding: 5px;
+        margin: 5px;
     }
 
     .meta-panel-item{
