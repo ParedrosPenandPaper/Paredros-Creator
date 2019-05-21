@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="editor-container">
         <meta-panel :meta="data.meta"></meta-panel>
         <adventure-panel :adventure="data.adventure"></adventure-panel>
     </div>
@@ -19,5 +19,9 @@
         }
     }
 </script>
-<style>
+
+<style scoped>
+    .editor-container {
+        background-color: #c4c4c4;
+    }
 </style>

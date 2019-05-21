@@ -35,7 +35,7 @@
         border: 1px solid black;
         border-radius: 20px;
         margin: 5px;
-
         padding: 5px;
+        background-color: #f0f0f0;
     }
 </style>
