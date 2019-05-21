@@ -1,0 +1,37 @@
+{
+    "meta": {
+        "author": "Hans fucking Dampf",
+        "dateCreated": "2019-05-17"
+    },
+
+    "adventure": {
+
+        "p1": "a paragraph",
+
+        "chapter1": {
+            "p1": "a chapter paragraph",
+            "scene1": {
+                "p": "scene1 in chapter1"
+            },
+            "p2": "another paragraph in chapter1"
+        },
+
+        "chapter2": {
+            "p1": "first paragraph in chapter2",
+            "scene1": {
+                "p": "scene1 in paragraph2"
+            },
+            "scene2": {
+                "p": "scene2 in paragraph2"
+            },
+            "p2": "last paragraph in chapter 2"
+        },
+
+        "p2": "an intermediate adventure paragraph",
+
+        "lastChapter": {
+            "p1": "this is just a long long text story thing that ends it all up and what the gosh dingle dangle fuck off...."
+        }
+
+    }
+}
