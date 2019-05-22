@@ -1,19 +1,19 @@
 <template>
     <div class="adventure-panel-container">
-        <div v-for="(prop, name) in adventure" :key="name"> <!-- iterator div -->
+        <div v-for="(prop, name) in adventure" :key="name">
             <chapter-panel
                     v-if="isChapter(prop)"
                     :chapter="prop"
                     :chapter-id="name"
                     @scene-paragraph-chapter-received="receiveSceneParagraph"
                     @chapter-paragraph-chapter-received="receiveChapterParagraph"
-            ></chapter-panel> <!-- receives chapter object and deconstructs it into scenes the same way as adventure-panel does with adventure -->
+            ></chapter-panel>
             <editor-paragraph
                     v-if="isParagraph(prop)"
                     :paragraph="prop"
                     :paragraph-id="name"
                     @paragraph-edited.self="receiveAdventureParagraph"
-            ></editor-paragraph> <!-- only contains text and is contenteditable -->
+            ></editor-paragraph>
         </div>
     </div>
 </template>
