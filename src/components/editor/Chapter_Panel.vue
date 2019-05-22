@@ -1,8 +1,18 @@
 <template>
     <div class="chapter-panel-container">
         <div v-for="(prop, name) in chapter" :key="name">
-            <scene-panel v-if="isChapter(prop)" :scene="prop"></scene-panel>
-            <editor-paragraph v-if="isParagraph(prop)">{{prop}}</editor-paragraph>
+            <scene-panel
+                    v-if="isChapter(prop)"
+                    :scene="prop"
+                    :scene-id="name"
+                    @scene-paragraph-received="receiveSceneParagraph"
+            ></scene-panel>
+            <editor-paragraph
+                    v-if="isParagraph(prop)"
+                    :paragraph="prop"
+                    :paragraph-id="name"
+                    @paragraph-edited.self="receiveInput"
+            ></editor-paragraph>
         </div>
     </div>
 </template>
@@ -13,6 +23,7 @@
 
     export default{
         props:{
+            chapterId: String,
             chapter: Object
         },
         components:{
@@ -20,11 +31,30 @@
             EditorParagraph
         },
         methods:{
-            isChapter: function(prop){
+            isChapter(prop){
                 return typeof(prop) === 'object'
             },
-            isParagraph: function(prop){
+            isParagraph(prop){
                 return typeof(prop) === 'string'
+            },
+            receiveSceneParagraph(sceneParagraph){
+                this.$emit('scene-paragraph-chapter-received',
+                    {
+                        chapterId: this.chapterId,
+                        sceneId: sceneParagraph.sceneId,
+                        paragraphId: sceneParagraph.paragraphId,
+                        paragraph: sceneParagraph.paragraph
+                    }
+                )
+            },
+            receiveInput(input){
+                this.$emit('chapter-paragraph-chapter-received',
+                    {
+                        chapterId: this.chapterId,
+                        paragraphId: input.paragraphId,
+                        paragraph: input.paragraph
+                    }
+                )
             }
         }
     }

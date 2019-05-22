@@ -2,7 +2,13 @@
     <div id="app">
         <menuebar id="menuebar"></menuebar>
         <tree id="tree"></tree>
-        <editor id="editor" :data="localData"></editor>
+        <editor
+                id="editor"
+                :data="localData"
+                @scene-paragraph-edited="editSceneParagraph"
+                @chapter-paragraph-edited="editChapterParagraph"
+                @adventure-paragraph-edited="editAdventureParagraph"
+        ></editor>
     </div>
 </template>
 
@@ -23,6 +29,20 @@
             Editor,
             Menuebar,
             Tree
+        },
+        methods: {
+            editSceneParagraph(pathObj){
+                this.localData.adventure[pathObj.chapterId][pathObj.sceneId][pathObj.paragraphId] = pathObj.paragraph
+                alert('scene paragraph successfully edited!')
+            },
+            editChapterParagraph(pathObj){
+                this.localData.adventure[pathObj.chapterId][pathObj.paragraphId] = pathObj.paragraph
+                alert('chapter paragraph successfully edited!')
+            },
+            editAdventureParagraph(pathObj){
+                this.localData.adventure[pathObj.paragraphId] = pathObj.paragraph
+                alert('adventure paragraph successfully edited!')
+            }
         }
     }
 </script>
