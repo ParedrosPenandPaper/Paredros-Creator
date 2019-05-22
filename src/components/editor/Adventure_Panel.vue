@@ -5,14 +5,14 @@
                     v-if="isChapter(prop)"
                     :chapter="prop"
                     :chapter-id="name"
-                    @scene-paragraph-chapter-received="receiveceneParagraph"
+                    @scene-paragraph-chapter-received="receiveSceneParagraph"
                     @chapter-paragraph-chapter-received="receiveChapterParagraph"
             ></chapter-panel> <!-- receives chapter object and deconstructs it into scenes the same way as adventure-panel does with adventure -->
             <editor-paragraph
                     v-if="isParagraph(prop)"
                     :paragraph="prop"
                     :paragraph-id="name"
-                    @paragraph-edited="receiveAdventureParagraph"
+                    @paragraph-edited.self="receiveAdventureParagraph"
             ></editor-paragraph> <!-- only contains text and is contenteditable -->
         </div>
     </div>
