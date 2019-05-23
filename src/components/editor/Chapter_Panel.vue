@@ -1,5 +1,5 @@
 <template>
-    <div class="chapter-panel-container">
+    <div class="chapter-panel-container" :style="'background-color: ' + color">
         <div v-for="(prop, name) in chapter" :key="name">
             <scene-panel
                     v-if="isChapter(prop)"
@@ -11,6 +11,8 @@
                     v-if="isParagraph(prop)"
                     :paragraph="prop"
                     :paragraph-id="name"
+                    @set-focus="color='lightblue'"
+                    @focus-set="color='#f0f0f0'"
                     @paragraph-edited.self="receiveInput"
             ></editor-paragraph>
         </div>
@@ -22,6 +24,11 @@
     import EditorParagraph from './Editor_Paragraph.vue'
 
     export default{
+        data: function(){
+            return {
+                color: '#f0f0f0'
+            }
+        },
         props:{
             chapterId: String,
             chapter: Object

@@ -2,6 +2,7 @@
     <p class="editor-paragraph-text"
        contenteditable="true"
        spellcheck="false"
+       @focusin="setFocus"
        @focusout="sendParagraph"
     >
         {{paragraph}}
@@ -16,6 +17,8 @@
         },
         methods: {
             sendParagraph() {
+                this.$emit('focus-set')
+
                 if(this.$el.innerText != this.paragraph)
                 this.$emit('paragraph-edited',
                     {
@@ -23,6 +26,9 @@
                         paragraph: this.$el.innerText
                     }
                 )
+            },
+            setFocus(){
+                this.$emit('set-focus')
             }
         }
     }

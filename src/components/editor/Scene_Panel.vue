@@ -1,8 +1,10 @@
 <template>
-    <div class="scene-panel-container">
+    <div class="scene-panel-container" :style="'background-color: ' + color">
         <editor-paragraph
                 :paragraph="scene.p"
                 paragraph-id="p"
+                @set-focus="color='lightblue'"
+                @focus-set="color='#e0e0e0'"
                 @paragraph-edited.self="receiveInput"
         ></editor-paragraph>
     </div>
@@ -12,7 +14,12 @@
     import EditorParagraph from './Editor_Paragraph.vue'
 
     export default{
-        props:{
+        data: function(){
+            return {
+                color: '#e0e0e0'
+            }
+        },
+        props: {
             sceneId: String,
             scene: Object
         },
@@ -40,6 +47,5 @@
         border-radius: 20px;
         margin: 5px;
         padding: 5px;
-        background-color: #e0e0e0;
     }
 </style>

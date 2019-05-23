@@ -1,5 +1,5 @@
 <template>
-    <div class="adventure-panel-container">
+    <div class="adventure-panel-container" :style="'background-color: ' + color">
         <div v-for="(prop, name) in adventure" :key="name">
             <chapter-panel
                     v-if="isChapter(prop)"
@@ -12,6 +12,8 @@
                     v-if="isParagraph(prop)"
                     :paragraph="prop"
                     :paragraph-id="name"
+                    @set-focus="color='lightblue'"
+                    @focus-set="color='white'"
                     @paragraph-edited.self="receiveAdventureParagraph"
             ></editor-paragraph>
         </div>
@@ -23,6 +25,11 @@
     import EditorParagraph from './Editor_Paragraph.vue'
 
     export default{
+        data: function(){
+            return {
+                color: 'white'
+            }
+        },
         props:{
             adventure: Object
         },
