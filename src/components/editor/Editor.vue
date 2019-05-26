@@ -41,5 +41,6 @@
 <style scoped>
     .editor-container {
         background-color: #c4c4c4;
+        overflow: scroll;
     }
 </style>

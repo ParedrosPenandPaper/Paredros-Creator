@@ -59,7 +59,7 @@
 
 <style scoped>
     .adventure-panel-container{
-        border: 1px solid black;
+        /*border: 1px solid black;*/
         border-radius: 20px;
         margin: 5px;
         padding: 5px;

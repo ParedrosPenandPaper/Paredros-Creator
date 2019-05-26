@@ -49,8 +49,8 @@
 
 <style scoped>
     #app {
-        width: 97vw;
-        height: 97vh;
+        /*width: 97vw;*/
+        max-height: 100%;
         display: grid;
         grid-template-columns: 33% 67%;
         grid-template-rows: 10% 90%;
