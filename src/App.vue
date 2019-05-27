@@ -8,11 +8,13 @@
                 @scene-paragraph-edited="editSceneParagraph"
                 @chapter-paragraph-edited="editChapterParagraph"
                 @adventure-paragraph-edited="editAdventureParagraph"
+                @delete-scene-editor="deleteScene"
         ></editor>
     </div>
 </template>
 
 <script>
+    import Vue from 'vue'
     import localData from '../data/paredros_data.json'
     import Editor from './components/editor/Editor.vue'
     import Menuebar from './components/menuebar/Menuebar.vue'
@@ -42,6 +44,9 @@
             editAdventureParagraph(pathObj){
                 this.localData.adventure[pathObj.paragraphId] = pathObj.paragraph
                 alert('adventure paragraph successfully edited!')
+            },
+            deleteScene(pathObj){
+                 Vue.delete(this.localData.adventure[pathObj.chapterId], pathObj.sceneId)
             }
         }
     }

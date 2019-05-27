@@ -8,6 +8,7 @@
                 @scene-paragraph-adventure-received="receiveSceneChapter"
                 @chapter-paragraph-adventure-received="receiveChapterParagraph"
                 @adventure-paragraph-received="receiveAdventureParagraph"
+                @delete-scene-adventure="deleteScene"
         ></adventure-panel>
     </div>
 </template>
@@ -33,6 +34,9 @@
             },
             receiveAdventureParagraph(adventureParagraph){
                 this.$emit('adventure-paragraph-edited', adventureParagraph)
+            },
+            deleteScene(pathObj){
+                this.$emit('delete-scene-editor', pathObj)
             }
         }
     }

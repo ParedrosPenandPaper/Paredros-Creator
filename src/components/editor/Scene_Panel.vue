@@ -10,7 +10,10 @@
             ></editor-paragraph>
         </div>
         <div class="delete-scene-button">
-            <div class="delete-scene-button-image"></div>
+            <div
+                    class="delete-scene-button-image"
+                    @click="deleteScene"
+            ></div>
         </div>
     </div>
 </template>
@@ -38,6 +41,9 @@
                         paragraph: input.paragraph
                     }
                 )
+            },
+            deleteScene(){
+                this.$emit('delete-scene', this.sceneId)
             }
         },
         components:{

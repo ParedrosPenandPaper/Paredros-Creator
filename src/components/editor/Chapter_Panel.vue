@@ -6,6 +6,7 @@
                     :scene="prop"
                     :scene-id="name"
                     @scene-paragraph-received="receiveSceneParagraph"
+                    @delete-scene="deleteScene"
             ></scene-panel>
             <editor-paragraph
                     v-if="isParagraph(prop)"
@@ -62,6 +63,9 @@
                         paragraph: input.paragraph
                     }
                 )
+            },
+            deleteScene(sceneId){
+                this.$emit('delete-scene-chapter', { chapterId: this.chapterId, sceneId: sceneId})
             }
         }
     }

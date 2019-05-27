@@ -7,6 +7,7 @@
                     :chapter-id="name"
                     @scene-paragraph-chapter-received="receiveSceneParagraph"
                     @chapter-paragraph-chapter-received="receiveChapterParagraph"
+                    @delete-scene-chapter="deleteScene"
             ></chapter-panel>
             <editor-paragraph
                     v-if="isParagraph(prop)"
@@ -52,6 +53,9 @@
             },
             receiveAdventureParagraph(adventureParagraph){
                 this.$emit('adventure-paragraph-received', adventureParagraph)
+            },
+            deleteScene(pathObj){
+                this.$emit('delete-scene-adventure', pathObj)
             }
         }
     }
