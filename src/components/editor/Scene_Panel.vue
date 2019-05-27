@@ -9,7 +9,9 @@
                     @paragraph-edited.self="receiveInput"
             ></editor-paragraph>
         </div>
-        <button class="delete-scene-button"></button>
+        <div class="delete-scene-button">
+            <div class="delete-scene-button-image"></div>
+        </div>
     </div>
 </template>
 
@@ -60,13 +62,19 @@
 
     .delete-scene-button{
         display: none;
-        width: 100px;
-        margin: 5px 5px 5px 0px;
-        border-radius: 5px;
-        background-color: red;
     }
 
     .scene-root:hover > .delete-scene-button{
         display: inline;
+    }
+
+    .delete-scene-button-image{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        background-color: rosybrown;
     }
 </style>
