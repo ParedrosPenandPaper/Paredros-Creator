@@ -1,7 +1,7 @@
 # build stage
-FROM node:6
+FROM node:8
 # FROM node
-WORKDIR /app
+WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
