@@ -6,9 +6,10 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
+
 # start node server
 EXPOSE 80
-CMD [ "node server.js" ]
+# CMD [ "node", "server.js" ]
 
 # production stage 
 # FROM nginx:stable-alpine as production-stage
