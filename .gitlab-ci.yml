@@ -14,8 +14,9 @@ docker build:
 
 deploy:
   stage: deploy
-  script: 
-  - docker stop paredros
+  script:
+  - docker network disconnect paredros-net paredros-creator-server 
+  - docker stop paredros-creator-server
   - docker run --name paredros-creator-server --network paredros-net -d --rm -p 80:80 paredros-creator-server-nodb
   tags:
   - deploy
