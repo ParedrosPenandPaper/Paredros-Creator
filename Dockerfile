@@ -2,6 +2,7 @@
 FROM node:8
 # FROM node
 WORKDIR /usr/src/app
+COPY server/server.js ./server.js
 COPY package*.json ./
 RUN npm install
 COPY . .
