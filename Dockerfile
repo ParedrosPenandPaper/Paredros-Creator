@@ -8,7 +8,7 @@ RUN npm run build
 
 # start node server
 EXPOSE 80
-ENTRYPOINT echo "i'm a test"
+CMD [ "node", "server.js" ]
 
 # production stage 
 # FROM nginx:stable-alpine as production-stage
