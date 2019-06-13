@@ -1,6 +1,6 @@
 const http = require('http');
 
-const hostname = 'it-projekt19-6.informatik.fh-nuernberg.de';
+const hostname = 'localhost';
 const port = 80;
 
 const server = http.createServer((req, res) => {
