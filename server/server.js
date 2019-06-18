@@ -11,7 +11,7 @@ const collName = 'adventures'
 
 app.use(express.static(__dirname + '/dist'))
 
-app.get('/mongo', (req, res) => {
+app.get('/getTestAdventure', (req, res) => {
     MongoClient.connect(url, {useNewUrlParser: true})
     .then(client => {
         let db = client.db(dbName)
