@@ -4,9 +4,9 @@ COPY server/server.js ./
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run serve
 
-# start node serve
+# start node build
 EXPOSE 80
 CMD [ "node", "server.js" ]
 
