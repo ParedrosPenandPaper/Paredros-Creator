@@ -14,9 +14,12 @@ app.use(express.static(__dirname + '/dist'))
 app.get('/mongo', (req, res) => {
     MongoClient.connect(url, {useNewUrlParser: true})
     .then(client => {
-        client.close()
-        res.status(200).send('connection working PENISt')
+        let db = client.db(dbName)
+        let coll = db.collection(collName)
+        let adventures = coll.find({}).toArray
+        res.status(200).send(adventures)
     })
+    .catch(err => res.status(400).send('failed: ' + err))
 })
 
 app.listen(port, () => {
