@@ -14,19 +14,7 @@ app.use(express.static(__dirname + '/dist'))
 app.get('/mongo', (req, res) => {
     MongoClient.connect(url, {useNewUrlParser: true})
     .then(client => {
-        client.db(dbName).collection(collName).find({}).toArray()
-        .then(result => {
-            db.close()
-            res.status(200).send(result)
-        })
-        .catch(err => {
-            db.close()
-            res.status(400).send(err)
-        })
-    })
-    .catch(err => {
-        db.close()
-        res.status(400).send(err)
+        res.status(200).json(client)
     })
 })
 
