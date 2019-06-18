@@ -10,9 +10,11 @@ const dbConn = 'mongodb://paredros-creator-db:27017/paredrosCreatorDb'
 app.use(express.static(__dirname + '/dist'))
 
 app.get('/mongo', (req, res) => {
-    res.status(200).send('penisT received')
-    /*MongoClient.connect(dbConn, {useNewUrlParser: true})
+    MongoClient.connect(dbConn, {useNewUrlParser: true})
     .then(db => {
+        res.status(200).send('db request received: ' + db)
+    })
+    /*
         db.collection('adventures').find({})
         .then(result => {
             db.close()
