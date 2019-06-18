@@ -16,7 +16,8 @@ app.get('/mongo', (req, res) => {
     .then(client => {
         let db = client.db(dbName)
         let coll = db.collection(collName)
-        let adventures = coll.find({}).toArray
+        let adventures = coll.find({}).toArray()
+        client.close()
         res.status(200).send(adventures)
     })
     .catch(err => res.status(400).send('failed: ' + err))
