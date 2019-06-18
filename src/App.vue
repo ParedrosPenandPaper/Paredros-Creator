@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <menuebar id="menuebar"></menuebar>
+        <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
         <tree id="tree"></tree>
         <editor
                 id="editor"
@@ -15,7 +15,8 @@
 
 <script>
     import Vue from 'vue'
-    import localData from '../data/paredros_data.json'
+    import axios from 'axios'
+    import localShit from '../data/paredros_data.json'
     import Editor from './components/editor/Editor.vue'
     import Menuebar from './components/menuebar/Menuebar.vue'
     import Tree from './components/tree/Tree.vue'
@@ -24,7 +25,7 @@
         name: 'app',
         data: function() {
             return{
-                localData
+                localData: localShit
             }
         },
         components: {
@@ -46,7 +47,11 @@
                 alert('adventure paragraph successfully edited!')
             },
             deleteScene(pathObj){
-                 Vue.delete(this.localData.adventure[pathObj.chapterId], pathObj.sceneId)
+                Vue.delete(this.localData.adventure[pathObj.chapterId], pathObj.sceneId)
+            },
+            getTestAdventure(){
+                axios.get('http://it-projekt19-6.informatik.fh-nuernberg.de/getTestAdventure')
+                    .then(response => (this.localData = response))
             }
         }
     }
