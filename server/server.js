@@ -13,7 +13,8 @@ app.use(express.static(__dirname + '/dist'))
 
 app.get('/mongo', (req, res) => {
     MongoClient.connect(url, {useNewUrlParser: true})
-    .then(() => {
+    .then(client => {
+        client.close()
         res.status(200).send('connection working PENISt')
     })
 })
