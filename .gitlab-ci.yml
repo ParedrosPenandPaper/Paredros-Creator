@@ -17,6 +17,6 @@ deploy:
   script:
   - docker network disconnect paredros-net paredros-creator-server 
   - docker stop paredros-creator-server
-  - docker run --name paredros-creator-server --network host --ip 192.168.0.3 --rm -d -p 80:80 paredros-creator-server-nodb
+  - docker run --name paredros-creator-server --network host --rm -d -p 80:80 paredros-creator-server-nodb
   tags:
   - deploy
