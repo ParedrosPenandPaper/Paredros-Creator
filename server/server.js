@@ -5,17 +5,16 @@ const app = express()
 const port = 80;
 
 const MongoClient = require('mongodb').MongoClient
-const dbConn = 'mongodb://paredros-creator-db:27017/paredrosCreatorDb'
+const url = 'mongodb://paredros-creator-db:27017'
+const dbName = 'paredrosCreatorDb'
+const collName = 'adventures'
 
 app.use(express.static(__dirname + '/dist'))
 
 app.get('/mongo', (req, res) => {
-    MongoClient.connect(dbConn, {useNewUrlParser: true})
-    .then(db => {
-        res.status(200).send('db request received: ' + db)
-    })
-    /*
-        db.collection('adventures').find({})
+    MongoClient.connect(url, {useNewUrlParser: true})
+    .then(client => {
+        client.db(dbName).collection(collName).find({}).toArray()
         .then(result => {
             db.close()
             res.status(200).send(result)
@@ -28,7 +27,7 @@ app.get('/mongo', (req, res) => {
     .catch(err => {
         db.close()
         res.status(400).send(err)
-    })*/
+    })
 })
 
 app.listen(port, () => {
