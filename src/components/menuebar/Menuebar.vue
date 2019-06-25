@@ -1,6 +1,10 @@
 <template>
     <div class="menuebar-container">
-        <button class="import" @click="$emit('get-test-adventure')">get test adventure</button>
+        <button>new</button>
+        <button class="import" @click="$emit('get-test-adventure')">load</button>
+        <button>save</button>
+        <button>import</button>
+        <button>export</button>
     </div>
 </template>
 
@@ -18,8 +22,8 @@
     align-items: center;
 }
 
-.import{
-    width: 100%;
+button{
+    width: 25%;
     height: 100%;
 }
 </style>
