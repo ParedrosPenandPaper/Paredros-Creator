@@ -23,7 +23,7 @@
 }
 
 button{
-    width: 25%;
+    width: 20%;
     height: 100%;
 }
 </style>
