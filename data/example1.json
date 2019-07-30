@@ -1,0 +1,83 @@
+{
+    "adventure": {
+        "text": "Intro text for adventure!",
+        "chapter01": {
+            "text": "Ich bin Kapitel 1, habe zwei Nachfolger und bin die Wurzel.",
+            "contents": [],
+            "successors": [
+                {"successor01": {
+                    "chapter02": {
+                        "text": "Ich bin Kapitel 2 und folge auf Kapitel 1.",
+                        "contents": [],
+                        "successors": []
+                    },
+                    "paths": [
+                        {"path01": [
+                            {"scene01": {
+                                "text": "Ich bin eine szene die auf Kapitel 1 folgt und die mit einer anderen Szene alterniert.",
+                                "contents": []
+                            }},
+                            {"scene02": {
+                                "text": "Und ich bin die zweite Szene.",
+                                "contents": []
+                            }}
+                        ]},
+
+                        {"path02": [
+                            {"scene03": {
+                                "text": "Ich bin die alternierende Szene, habe aber keinen Szenen Nachfolger q.q",
+                                "contents": []
+                            }}
+                        ]}
+                    ]
+                }},
+
+                {"successor02": {
+                    "chapter03": {
+                        "text": "Kapitel 2 ist mir einerlei denn ich bin Kapitel 3.",
+                        "contents": [],
+                        "successors": [
+                            {"successor01": {
+                                "chapter04": {
+                                    "text": "I am the Alpha and the Omega. There is no beginning without an end!",
+                                    "contents": [],
+                                    "successors": []
+                                }
+                            }},
+                            {"paths": [
+                                {"path01": [
+                                    {"scene01": {
+                                        "text": "Ich bin die Vorletzte Szene.",
+                                        "contents": []
+                                    }},
+                                    {"scene02": {
+                                        "text": "Und ich bin die letzte Szene.",
+                                        "contents": []
+                                    }}
+                                ]}
+                            ]}
+                        ]
+                    },
+                    "paths": [
+                        {"path01": [
+                            {"scene01": {
+                                "text": "Ich bin der Beginn einer sequentiellen Folge von Szenen.",
+                                "contents": []
+                            }},
+                            {"scene02": {
+                                "text": "Ich bin die Mitte einer sequentiellen Folge von Szenen.",
+                                "contents": []
+                            }},
+                            {"scene03": {
+                                "text": "Ich bin das Ende einer sequentiellen Folge von Szenen.",
+                                "contents": []
+                            }}
+                        ]}
+                    ]
+                }}
+            ]
+        }
+    },
+
+    "Entities": {}
+}
