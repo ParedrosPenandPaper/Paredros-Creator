@@ -2,7 +2,7 @@
 
 const express = require('express')
 const app = express()
-const port = 80;
+const port = 8080;
 
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://paredros-creator-db:27017'

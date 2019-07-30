@@ -12,6 +12,8 @@
     import Menuebar from './components/menuebar/Menuebar.vue'
     import Tree from './components/tree/Tree.vue'
 
+    import localData from '../data/example2.json'
+
     export default {
         name: 'app',
         data: function() {
@@ -25,8 +27,11 @@
         methods: {
             getTestAdventure(){
                 axios.get('http://it-projekt19-6.informatik.fh-nuernberg.de/getTestAdventure')
-                    .then(response => (this.localData = response))
+                    .then(response => (this.$store.commit('setAdventureObject', response)))
             }
+        },
+        mounted() {
+            this.$store.commit('getExampleObjectOne', localData)
         }
     }
 </script>
