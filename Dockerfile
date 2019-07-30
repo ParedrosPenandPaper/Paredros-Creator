@@ -4,10 +4,10 @@ COPY server/server.js ./
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run serve
 
 # start node build
-EXPOSE 80
+EXPOSE 8080
 CMD [ "node", "server.js" ]
 
 # production stage 
