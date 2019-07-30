@@ -19,6 +19,9 @@
         width: 50px;
         height: 50px;
         cursor: move;
+
+        border: 1px solid steelblue;
+        border-radius: 25px;
     }
 
     .label-container{

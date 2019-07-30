@@ -10,12 +10,6 @@ export const store = new Vuex.Store({
     mutations: {
         setAdventureObject(state, response) {
             state.adventureObject = response
-        },
-        getExampleObjectOne(state, example) {
-            state.adventureObject = example
-        },
-        getExampleObjectTwo(state, example) {
-            state.adventureObject = example
         }
     },
     actions: {

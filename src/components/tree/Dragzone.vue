@@ -27,7 +27,7 @@
 
         display: flex;
         flex-flow: column nowrap;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
     }
 </style>
