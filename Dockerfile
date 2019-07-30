@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # start node build
-EXPOSE 8080
+EXPOSE 80
 CMD [ "node", "server.js" ]
 
 # production stage 
