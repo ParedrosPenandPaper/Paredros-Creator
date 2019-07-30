@@ -2,21 +2,12 @@
     <div id="app">
         <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
         <tree id="tree"></tree>
-        <editor
-                id="editor"
-                :data="localData"
-                @scene-paragraph-edited="editSceneParagraph"
-                @chapter-paragraph-edited="editChapterParagraph"
-                @adventure-paragraph-edited="editAdventureParagraph"
-                @delete-scene-editor="deleteScene"
-        ></editor>
+        <editor></editor>
     </div>
 </template>
 
 <script>
-    import Vue from 'vue'
     import axios from 'axios'
-    import localShit from '../data/paredros_data.json'
     import Editor from './components/editor/Editor.vue'
     import Menuebar from './components/menuebar/Menuebar.vue'
     import Tree from './components/tree/Tree.vue'
@@ -24,9 +15,7 @@
     export default {
         name: 'app',
         data: function() {
-            return{
-                localData: localShit
-            }
+
         },
         components: {
             Editor,
@@ -34,21 +23,6 @@
             Tree
         },
         methods: {
-            editSceneParagraph(pathObj){
-                this.localData.adventure[pathObj.chapterId][pathObj.sceneId][pathObj.paragraphId] = pathObj.paragraph
-                alert('scene paragraph successfully edited!')
-            },
-            editChapterParagraph(pathObj){
-                this.localData.adventure[pathObj.chapterId][pathObj.paragraphId] = pathObj.paragraph
-                alert('chapter paragraph successfully edited!')
-            },
-            editAdventureParagraph(pathObj){
-                this.localData.adventure[pathObj.paragraphId] = pathObj.paragraph
-                alert('adventure paragraph successfully edited!')
-            },
-            deleteScene(pathObj){
-                Vue.delete(this.localData.adventure[pathObj.chapterId], pathObj.sceneId)
-            },
             getTestAdventure(){
                 axios.get('http://it-projekt19-6.informatik.fh-nuernberg.de/getTestAdventure')
                     .then(response => (this.localData = response))
