@@ -1,6 +1,6 @@
 <template>
-    <div class="item-container">
-        <p class="label-container">
+    <div class="item-container" draggable>
+        <p class="label-container" draggable="false">
             {{label}}
         </p>
     </div>

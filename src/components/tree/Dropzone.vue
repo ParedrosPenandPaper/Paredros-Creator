@@ -1,5 +1,7 @@
 <template>
-    <div class="drop-zone-container"></div>
+    <div class="drop-zone-container">
+        
+    </div>
 </template>
 
 <script>
