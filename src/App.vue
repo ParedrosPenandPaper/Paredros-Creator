@@ -15,7 +15,7 @@
     export default {
         name: 'app',
         data: function() {
-
+            return {}
         },
         components: {
             Editor,

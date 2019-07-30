@@ -1,13 +1,27 @@
 <template>
-    <div class="tree-container"></div>
+    <div class="tree-container">
+        <dragzone></dragzone>
+        <dropzone></dropzone>
+    </div>
 </template>
 
 <script>
+    import Dragzone from './Dragzone.vue'
+    import Dropzone from './Dropzone.vue'
+
     export default {
-        name: "Tree"
+        components: {
+            Dragzone,
+            Dropzone
+        }
     }
 </script>
 
 <style scoped>
-
+    .tree-container{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: stretch;
+        align-items: center;
+    }
 </style>
