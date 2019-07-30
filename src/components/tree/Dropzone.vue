@@ -1,11 +1,16 @@
 <template>
     <div class="drop-zone-container">
-        
+        <tree-renderer></tree-renderer>
     </div>
 </template>
 
 <script>
+    import TreeRenderer from './Treerenderer.vue'
+
     export default {
+        components: {
+            TreeRenderer
+        }
     }
 </script>
 
