@@ -23,7 +23,8 @@
 }
 
 button{
-    width: 20%;
     height: 100%;
+    flex-grow: 1;
+    border-style: none;
 }
 </style>
