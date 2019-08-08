@@ -26,5 +26,7 @@ button{
     height: 100%;
     flex-grow: 1;
     border-style: none;
+
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>

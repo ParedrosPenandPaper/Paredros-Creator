@@ -1,6 +1,6 @@
 <template>
     <div class="tree-renderer-container">
-        <svg class="canvas" viewBox="0 0 100 137,4882918"></svg>
+        <svg class="canvas" width="100%" height="100%"></svg>
     </div>
 </template>
 

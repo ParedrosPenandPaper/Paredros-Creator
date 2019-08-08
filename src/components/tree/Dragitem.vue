@@ -18,15 +18,16 @@
     .item-container{
         width: 50px;
         height: 50px;
-        cursor: move;
 
+        display: flex;
+        justify-content: center;
+
+        cursor: move;
         border: 1px solid steelblue;
         border-radius: 25px;
     }
 
     .label-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        line-height: 18px;
     }
 </style>

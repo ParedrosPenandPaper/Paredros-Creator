@@ -48,6 +48,8 @@
         grid-template-areas:
                 "menue menue"
                 "tree editor";
+
+        font-family: Avenir;
     }
 
     #menuebar{

@@ -29,5 +29,7 @@
         flex-flow: column nowrap;
         justify-content: space-evenly;
         align-items: center;
+
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 </style>
