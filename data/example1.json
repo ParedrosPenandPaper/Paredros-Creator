@@ -4,12 +4,12 @@
         "chapter01": {
             "text": "Ich bin Kapitel 1, habe zwei Nachfolger und bin die Wurzel.",
             "contents": [],
-            "successors": [
+            "children": [
                 {"successor01": {
                     "chapter02": {
                         "text": "Ich bin Kapitel 2 und folge auf Kapitel 1.",
                         "contents": [],
-                        "successors": []
+                        "children": []
                     },
                     "paths": [
                         {"path01": [
@@ -36,12 +36,12 @@
                     "chapter03": {
                         "text": "Kapitel 2 ist mir einerlei denn ich bin Kapitel 3.",
                         "contents": [],
-                        "successors": [
+                        "children": [
                             {"successor01": {
                                 "chapter04": {
                                     "text": "I am the Alpha and the Omega. There is no beginning without an end!",
                                     "contents": [],
-                                    "successors": []
+                                    "children": []
                                 }
                             }},
                             {"paths": [

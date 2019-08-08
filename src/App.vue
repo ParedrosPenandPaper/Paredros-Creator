@@ -12,8 +12,9 @@
     import Menuebar from './components/menuebar/Menuebar.vue'
     import Tree from './components/tree/Tree.vue'
 
-    import localDataOne from '../data/example1.json'
+    //import localDataOne from '../data/example1.json'
     //import localDataTwo from '../data/example2.json'
+    import localDataThree from '../data/example3.json'
 
     export default {
         name: 'app',
@@ -32,7 +33,7 @@
             }
         },
         mounted() {
-            this.$store.commit('setAdventureObject', localDataOne)
+            this.$store.commit('setAdventureObject', localDataThree)
             
         }
     }
