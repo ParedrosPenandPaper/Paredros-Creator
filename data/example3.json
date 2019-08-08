@@ -1,0 +1,43 @@
+[
+  {
+    "adventure": "adventure01"
+  },
+  {
+    "chapter": "chapter01",
+    "text": "Ich bin das erste Kapitel",
+    "content": [],
+    "path": [],
+    "children": [
+      {
+        "chapter": "chapter02",
+        "text": "Ich bin Kapitel 2",
+        "content": [],
+        "path": [],
+        "children": [
+          {
+            "chapter": "chapter03",
+            "text": "Ich bin Kapitel 3",
+            "content": [],
+            "path": [],
+            "children": [
+              {
+                "chapter": "chapter04",
+                "text": "Ich bin Kapitel 4",
+                "content": [],
+                "path": [],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "chapter": "chapter05",
+        "text": "Ich bin Kapitel 2-2",
+        "content": [],
+        "path": [],
+        "children": []
+      }
+    ]
+  }
+]
