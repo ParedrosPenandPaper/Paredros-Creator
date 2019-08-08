@@ -23,7 +23,7 @@
         justify-content: center;
 
         cursor: move;
-        border: 1px solid steelblue;
+        border: 2px solid steelblue;
         border-radius: 25px;
     }
 

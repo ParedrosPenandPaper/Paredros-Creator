@@ -25,8 +25,19 @@
 button{
     height: 100%;
     flex-grow: 1;
-    border-style: none;
 
+    border-style: none;
+    outline-style: none;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5em;
+    background-color: steelblue;
+}
+
+button:hover{
+    background-color: #7eaacd;
+}
+
+button:active{
+    background-color: #396a93;
 }
 </style>

@@ -1,16 +1,12 @@
 <template>
     <div class="tree-renderer-container">
-<<<<<<< HEAD
-        <svg class="canvas" width="100%" height="100%"></svg>
-=======
-        <svg class="canvas" viewBox="0 0 100 137,4882918">
-            <g transform="translate(30,80)">
+        <svg class="canvas" width="100%" height="100%">
+            <g class="tree">
                 <g class="links"></g>
                 <g class="chapters"></g>
             </g>
             <g class="adventure"></g>
         </svg>
->>>>>>> 2cb2c2424bfb8e22fce77ca04dccac7fc4f04ab7
     </div>
 </template>
 
@@ -30,10 +26,18 @@
         },
         methods: {
             renderTree() {
+                // length constants
+                const svgWidth = d3.select('div.tree-renderer-container').style('width').replace('px', '')
+                const svgHeight = d3.select('div.tree-renderer-container').style('height').replace('px', '')
+                const chapterRadius = 14
+
+                d3.select('svg').attr('width', svgWidth)
+                d3.select('svg').attr('height', svgHeight)
+
                 // das Datenformat doch trennen wegen render reasons bzw funktionen schreiben die Teile extrahieren
                 var root = d3.hierarchy(this.adventure)
                 var treeLayout = d3.tree()
-                treeLayout.size([100,600])
+                treeLayout.size([svgWidth, svgHeight - 4*chapterRadius])
                 treeLayout(root)
 
 
@@ -45,7 +49,7 @@
                     .classed('chapter', true)
                     .attr('cx', function(d) {return d.x})
                     .attr('cy', function(d) {return d.y})
-                    .attr('r', 14)
+                    .attr('r', chapterRadius)
 
 
                 d3.select('svg g.links')
@@ -59,6 +63,7 @@
                     .attr('x2', function(d) {return d.target.x;})
                     .attr('y2', function(d) {return d.target.y;});
 
+                d3.select('svg g.tree').attr('transform', `translate(0,${2*chapterRadius})`)
 
                 d3.select('svg g.chapters')
                     .selectAll('circle')
@@ -84,9 +89,6 @@
     }
 
     .canvas{
-        width:90%;
-        height:90%;
-
     }
     .chapters {
         fill: steelblue;

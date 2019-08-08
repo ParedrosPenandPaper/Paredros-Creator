@@ -22,7 +22,7 @@
 <style scoped>
     .drag-zone-container{
         height: 100%;
-        width: 60px;
+        width: 70px;
         background-color: #c4c4c4;
 
         display: flex;

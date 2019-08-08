@@ -17,6 +17,6 @@
 <style scoped>
     .drop-zone-container{
         height: 100%;
-        width: calc(100% - 60px);
+        width: calc(100% - 70px);
     }
 </style>
