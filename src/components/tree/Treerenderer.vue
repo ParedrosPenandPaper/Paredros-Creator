@@ -158,6 +158,8 @@
                 }
 
                 function addEventHandlers(){
+                    let tmp
+
                     d3.selectAll('svg g.chapters circle')
                         .on('dragenter', function () {
                             d3.select(this)
@@ -167,7 +169,20 @@
                         .on('dragleave', function () {
                             d3.select(this)
                                 .attr('r', 14)
-                                .style("fill", "steelblue")
+                                .style('fill', 'steelblue')
+                        })
+                        .on('mouseenter', function () {
+                            let chapter = d3.select(this)
+
+                            tmp = d3.select('svg')
+                                .append('text')
+                                    .text(chapter.datum().data.chapter)
+                                    .attr('x', chapter.datum().x)
+                                    .attr('dy', chapter.datum().y)
+                                    .node()
+                        })
+                        .on('mouseleave', function () {
+                            d3.select(tmp).remove()
                         })
                 }
             }
