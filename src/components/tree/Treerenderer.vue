@@ -13,6 +13,7 @@
 
 <script>
     import * as d3 from 'd3'
+    import * as math from '../../util/Vectormath.js'
 
     export default {
         computed: {
@@ -105,9 +106,9 @@
                     const sourceV = {x: parent.x, y: parent.y}
                     const targetV = {x: child.x, y: child.y}
 
-                    const distanceVector = vSub(targetV, sourceV)
-                    const distance = length(distanceVector)
-                    const vStep = vScale(distanceVector, 1/3)
+                    const distanceVector = math.vSub(targetV, sourceV)
+                    const distance = math.length(distanceVector)
+                    const vStep = math.vScale(distanceVector, 1/3)
                     
                     let pathString = pathGeometryCubicBezier(sourceV, targetV, pathIndex)
 
@@ -125,9 +126,9 @@
                         else{
                             if (pathIndex % 2 == 0) pathIndex = -(pathIndex-1)
                             
-                            let vC = vScale(vOrthNorm(vStep), pathIndex*0.2*distance)
-                            let C1 = vAdd(vAdd(sourceV, vStep), vC)
-                            let C2 = vAdd(vAdd(sourceV, vScale(vStep, 2)), vC)
+                            let vC = math.vScale(math.vOrthNorm(vStep), pathIndex*0.2*distance)
+                            let C1 = math.vAdd(math.vAdd(sourceV, vStep), vC)
+                            let C2 = math.vAdd(math.vAdd(sourceV, math.vScale(vStep, 2)), vC)
 
                             pathString = `M ${sourceV.x} ${sourceV.y} C ${C1.x} ${C1.y}, ${C2.x} ${C2.y}, ${targetV.x} ${targetV.y}`
                         }
@@ -171,30 +172,6 @@
                 }
             }
         }
-    }
-
-    function vOrthNorm(v){
-        let hyp = length(v)
-        return {
-            x: -(v.y/hyp),
-            y: v.x/hyp
-        }
-    }
-
-    function vScale(v, s){
-        return {x: v.x*s, y: v.y*s}
-    }
-
-    function vAdd(v1, v2){
-        return {x: v1.x+v2.x, y: v1.y+v2.y}
-    }
-
-    function vSub(v1, v2){
-        return {x: v1.x-v2.x, y: v1.y-v2.y}
-    }
-
-    function length(v){
-        return Math.sqrt(v.x**2 + v.y**2)
     }
 
 </script>
