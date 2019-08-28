@@ -4,11 +4,23 @@ stages:
   - build-image
   - deploy
   
-docker-build:
+build-staging:
   stage: build-image
   script:
-  - docker build --rm -t paredros-creator-server-nodb .
+  - docker build --rm -t paredros-creator-server-nodb Dockerfile_staging
   - docker images -a
+  only:
+  - master
+  tags:
+  - deploy
+
+build-prod:
+  stage: build-image
+    script:
+  - docker build --rm -t paredros-creator-server-nodb Dockerfile_prod
+  - docker images -a
+  only:
+  - release
   tags:
   - deploy
 
@@ -17,6 +29,8 @@ deploy-staging:
   script:
   - docker stop paredros-creator-server
   - docker run --name paredros-creator-server --network paredros-net --rm -d -p 1337:80 paredros-creator-server-nodb
+  only:
+  - master
   tags:
   - deploy
 
