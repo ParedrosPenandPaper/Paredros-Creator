@@ -7,7 +7,7 @@ stages:
 build-staging:
   stage: build-image
   script:
-  - docker build --rm -t paredros-creator-server-nodb Dockerfile_staging
+  - docker build --rm -t paredros-creator-server-nodb -f Dockerfile_staging
   - docker images -a
   only:
   - master
@@ -17,7 +17,7 @@ build-staging:
 build-prod:
   stage: build-image
   script:
-  - docker build --rm -t paredros-creator-server-nodb Dockerfile_prod
+  - docker build --rm -t paredros-creator-server-nodb -f Dockerfile_prod
   - docker images -a
   only:
   - release
