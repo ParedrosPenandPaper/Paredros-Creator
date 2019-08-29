@@ -28,12 +28,16 @@
         },
         methods: {
             renderTree() {
+                d3.selectAll("svg g.chapters > *").remove()
+                d3.selectAll("svg g.links > *").remove()
+                d3.selectAll("svg g.scenes > *").remove()
                 // length constants
                 const svgWidth = d3.select('div.tree-renderer-container').style('width').replace('px', '')
                 const svgHeight = d3.select('div.tree-renderer-container').style('height').replace('px', '')
                 const chapterRadius = 14
                 const sceneRadius = chapterRadius / 2
                 const treeScaleFactor = 0.60
+                const vueComponent = this
 
                 d3.select('svg').attr('width', svgWidth)
                 d3.select('svg').attr('height', svgHeight)
@@ -169,6 +173,11 @@
                                 .attr('r', 14)
                                 .style("fill", "steelblue")
                         })
+                        .on('click', function () {
+                            vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
+                            vueComponent.renderTree()
+
+                    })
                 }
             }
         }

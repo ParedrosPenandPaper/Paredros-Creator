@@ -34,6 +34,7 @@
         },
         mounted() {
             this.$store.commit('setAdventureObject', localDataThree)
+            //this.$store.commit('addChapter', "bitte sei am Ende neu neu")
             
         }
     }
