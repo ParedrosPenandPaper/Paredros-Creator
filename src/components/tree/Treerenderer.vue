@@ -5,6 +5,7 @@
                 <g class="links"></g>
                 <g class="chapters"></g>
                 <g class="scenes"></g>
+                <g class="labels"></g>
             </g>
             <g class="adventure"></g>
         </svg>
@@ -31,6 +32,7 @@
                 d3.selectAll("svg g.chapters > *").remove()
                 d3.selectAll("svg g.links > *").remove()
                 d3.selectAll("svg g.scenes > *").remove()
+                d3.selectAll("svg g.labels > *").remove()
                 // length constants
                 const svgWidth = d3.select('div.tree-renderer-container').style('width').replace('px', '')
                 const svgHeight = d3.select('div.tree-renderer-container').style('height').replace('px', '')
@@ -178,12 +180,13 @@
                         .on('mouseenter', function () {
                             let chapter = d3.select(this)
 
-                            tmp = d3.select('svg')
+                            tmp = d3.select('svg g.labels')
                                 .append('text')
-                                    .text(chapter.datum().data.chapter)
-                                    .attr('x', chapter.datum().x)
-                                    .attr('dy', chapter.datum().y)
-                                    .node()
+                                .classed('label', true)
+                                .text(chapter.datum().data.chapter)
+                                .attr('x', chapter.datum().x)
+                                .attr('dy', chapter.datum().y)
+                                .node()
                         })
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
