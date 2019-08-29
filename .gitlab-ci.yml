@@ -27,7 +27,7 @@ build-prod:
 deploy-staging:
   stage: deploy
   script:
-  - docker stop paredros-creator-server
+  - docker stop paredros-creator-server-staging
   - docker run --name paredros-creator-server-staging --network paredros-net --rm -d -p 1337:80 paredros-creator-server-nodb
   only:
   - master
@@ -37,7 +37,7 @@ deploy-staging:
 deploy-prod:
   stage: deploy
   script:
-  - docker stop paredros-creator-server
+  - docker stop paredros-creator-server-prod
   - docker run --name paredros-creator-server-prod --network paredros-net --rm -d -p 80:80 paredros-creator-server-nodb
   only:
   - release
