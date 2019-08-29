@@ -3,67 +3,77 @@
     "adventure": "adventure01"
   },
   {
-    "chapter": "chapter01",
+    "title": "chapter01",
     "text": "Ich bin das erste Kapitel",
     "content": [],
     "paths": [],
     "children": [
       {
-        "chapter": "chapter02",
+        "title": "chapter02",
         "text": "Ich bin Kapitel 2",
         "content": [],
         "paths": [
             [
               {
-                "scene": "Szene A von Kap 2 zu Kap 1"
+                "title": "szene01",
+                "text": "Szene A von Kap 2 zu Kap 1"
               },
               {
-                "scene": "Szene A2 von Kap 2 zu Kap 1"
+                "title": "szene02",
+                "text": "Szene A2 von Kap 2 zu Kap 1"
               },
               {
-                "scene": "Szene A3 von Kap 2 zu Kap 1"
+                "title": "szene03",
+                "text": "Szene A3 von Kap 2 zu Kap 1"
               },
               {
-                "scene": "Szene A4 von Kap 2 zu Kap 1"
+                "title": "szene04",
+                "text": "Szene A4 von Kap 2 zu Kap 1"
               }
             ],
             [
               {
-                "scene": "Szene B von Kap 2 zu Kap 1"
+                "title": "szene05",
+                "text": "Szene B von Kap 2 zu Kap 1"
               }
             ],
             [
               {
-                "scene": "Szene C von Kap 2 zu Kap 1"
+                "title": "szene06",
+                "text": "Szene C von Kap 2 zu Kap 1"
               },
               {
-                "scene": "Szene C2 von Kap 2 zu Kap 1"
+                "title": "szene07",
+                "text": "Szene C2 von Kap 2 zu Kap 1"
               },
               {
-                "scene": "Szene C3 von Kap 2 zu Kap 1"
+                "title": "szene08",
+                "text": "Szene C3 von Kap 2 zu Kap 1"
               }
             ]
         ],
         "children": [
           {
-            "chapter": "chapter03",
+            "title": "chapter03",
             "text": "Ich bin Kapitel 3",
             "content": [],
             "paths": [
               [
                 {
-                  "scene": "Szene A von Kap 3 zu Kap 2"
+                  "title": "szene09",
+                  "text": "Szene A von Kap 3 zu Kap 2"
                 }
               ],
               [
                 {
-                  "scene": "Szene B von Kap 3 zu Kap 2"
+                  "title": "szene10",
+                  "text": "Szene B von Kap 3 zu Kap 2"
                 }
               ]
             ],
             "children": [
               {
-                "chapter": "chapter04",
+                "title": "chapter04",
                 "text": "Ich bin Kapitel 4",
                 "content": [],
                 "paths": [],
@@ -74,18 +84,20 @@
         ]
       },
       {
-        "chapter": "chapter05",
+        "title": "chapter05",
         "text": "Ich bin Kapitel 2-2",
         "content": [],
         "paths": [
           [
             {
-              "scene": "Szene A von Kap 5 zu Kap 1"
+              "title": "szene11",
+              "text": "Szene A von Kap 5 zu Kap 1"
             }
           ],
           [
             {
-              "scene": "Szene B von Kap 5 zu Kap 1"
+              "title": "szene12",
+              "text": "Szene B von Kap 5 zu Kap 1"
             }
           ]
         ],
