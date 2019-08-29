@@ -125,6 +125,8 @@
                                             .attr('d', pathString)
                                             .node()
 
+                    svgLink['__data__'] = { parent: parent, child: child}
+
                     let svgScenes = d3.select('svg g.scenes')
                     drawEvenDistributedScenes(svgScenes, svgLink, path)
 
@@ -149,16 +151,19 @@
                             const pathLength = svgLink.getTotalLength()
                             const step = pathLength / (path.length + 1)
 
+                            svgLink['__data__']['svgScenes'] = []
+
                             for(let j = 1; j <= path.length; j++){
                                 let sceneCoords = svgLink.getPointAtLength( step * j )
 
-                                let circle = svgScenes.append('circle')
+                                let svgScene = svgScenes.append('circle')
                                     .attr('cx', sceneCoords.x)
                                     .attr('cy', sceneCoords.y)
                                     .attr('r', sceneRadius)
                                     .node()
 
-                                circle["__data__"] = { path: path, index: j-1, x: sceneCoords.x, y: sceneCoords.y }
+                                svgScene['__data__'] = { path: path, index: j-1, x: sceneCoords.x, y: sceneCoords.y }
+                                svgLink['__data__']['svgScenes'].push(svgScene)
                             }
                         }
                     }
@@ -202,7 +207,6 @@
                             vueComponent.renderTree()
                     })
 
-                    
                     d3.selectAll('svg g.scenes circle')
                         .on('mouseenter', function () {
                             let sceneNode = d3.select(this)
@@ -221,9 +225,65 @@
                             d3.select(tmp).remove()
                         })
                         .on('click', function () {
-                            vueComponent.$store.commit('addSceneAfter', d3.select(this).data()[0])
+                            vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
                             vueComponent.renderTree()
                         })
+
+                    let collapsedLinks = []
+                    d3.selectAll('svg g.links path')
+                        .on('click', handleCollapse)
+                    
+                    function handleCollapse () {
+
+                        let result = collapsedLinks.find(element => element[1] === this)
+                        if(!result){ // a not yet collapsed link has been clicked
+                            let linkData = d3.select(this).datum()
+
+                            let affectedSvgLinks = d3.selectAll('svg g.links path')
+                                .filter( function(d) {
+                                    return d.parent === linkData.parent && d.child === linkData.child
+                                })
+
+                            affectedSvgLinks.style('display', 'none')
+
+                            for(let data of affectedSvgLinks.data()){
+                                let affectedSvgScenes = data.svgScenes
+                                affectedSvgScenes.forEach(svgScene => d3.select(svgScene).style('display', 'none'))
+                            }
+
+                            let collapsedLink = d3.select('svg g.links') // collapsed link
+                                .append('path')
+                                    .attr('d', `M ${linkData.parent.x} ${linkData.parent.y} L ${linkData.child.x} ${linkData.child.y}`)
+                                    .on('click', handleCollapse)
+                                    .node()
+                            collapsedLink['__data__'] = linkData
+                            collapsedLinks.push([this, collapsedLink])
+                        }
+                        else{ // a collapsed link hast been clicked
+                            let clickedIndex = collapsedLinks.findIndex(element => element[1] === this)
+
+                            console.log(collapsedLinks[clickedIndex])
+
+                            let collapsedLink = collapsedLinks[clickedIndex][1]
+                            collapsedLinks.splice(clickedIndex, 1)
+
+                            d3.select(collapsedLink).remove()
+
+                            let linkData = d3.select(this).datum()
+
+                            let affectedSvgLinks = d3.selectAll('svg g.links path')
+                                .filter( function(data) {
+                                    return data.parent === linkData.parent && data.child === linkData.child
+                                })
+
+                            affectedSvgLinks.style('display', 'inline')
+
+                            for(let data of affectedSvgLinks.data()){
+                                let affectedSvgScenes = data.svgScenes
+                                affectedSvgScenes.forEach(svgScene => d3.select(svgScene).style('display', 'inline'))
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -248,6 +308,8 @@
         fill: none;
         stroke: #ccc;
         stroke-width: 3px;
+
+        cursor: pointer;
     }
 
     .scenes {
