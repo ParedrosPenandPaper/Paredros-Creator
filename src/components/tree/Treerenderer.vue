@@ -221,6 +221,10 @@
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
                         })
+                        .on('click', function () {
+                            vueComponent.$store.commit('addSceneAfter', d3.select(this).data()[0])
+                            vueComponent.renderTree()
+                        })
                 }
             }
         }

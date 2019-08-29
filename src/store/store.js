@@ -21,6 +21,13 @@ export const store = new Vuex.Store({
                 text: ""
             }
             chapter.children.push(newChapter)
+        },
+        addSceneAfter(state, scene) {
+            // TODO: Zusammenbau der Szene auslagern
+            let newScene = {
+                "scene": "neue Szene eingefügt"
+            }
+            scene.path.splice(scene.index + 1, 0, newScene)
         }
     },
     actions: {
