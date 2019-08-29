@@ -184,9 +184,10 @@
                                 .append('text')
                                 .classed('label', true)
                                 .text(chapter.datum().data.chapter)
-                                .attr('x', chapter.datum().x + chapterRadius + 2)
-                                .attr('dy', chapter.datum().y)
-                                .node()
+                                    .attr('x', chapter.datum().x + chapterRadius + 2)
+                                    .attr('dy', chapter.datum().y)
+                                    .attr('font-familiy', 'Segoe UI')
+                                    .node()
                         })
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
@@ -225,6 +226,10 @@
     .scenes {
         fill: #ccc;
         stroke: black;
+    }
+
+    .labels {
+        font-family: 'Segoe UI';
     }
 
 </style>
