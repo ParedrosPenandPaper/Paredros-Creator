@@ -150,10 +150,16 @@
                             for(let j = 1; j <= path.length; j++){
                                 let sceneCoords = svgLink.getPointAtLength( step * j )
 
-                                svgScenes.append('circle')
+                                let circle = svgScenes.append('circle')
                                     .attr('cx', sceneCoords.x)
                                     .attr('cy', sceneCoords.y)
                                     .attr('r', sceneRadius)
+                                    .node()
+
+                                circle["__data__"] = { path: path, index: j-1 }
+
+                                // es-lint-disable-next-line
+                                console.log(d3.select(circle))
                             }
                         }
                     }
@@ -195,7 +201,6 @@
                         .on('click', function () {
                             vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
                             vueComponent.renderTree()
-
                     })
                 }
             }
