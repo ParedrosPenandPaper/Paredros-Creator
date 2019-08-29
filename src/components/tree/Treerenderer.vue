@@ -29,16 +29,18 @@
         },
         methods: {
             renderTree() {
+                // clear svg
                 d3.selectAll("svg g.chapters > *").remove()
                 d3.selectAll("svg g.links > *").remove()
                 d3.selectAll("svg g.scenes > *").remove()
                 d3.selectAll("svg g.labels > *").remove()
+
                 // length constants
                 const svgWidth = d3.select('div.tree-renderer-container').style('width').replace('px', '')
                 const svgHeight = d3.select('div.tree-renderer-container').style('height').replace('px', '')
                 const chapterRadius = 14
                 const sceneRadius = chapterRadius / 2
-                const treeScaleFactor = 0.60
+                const treeScaleFactor = 1
                 const vueComponent = this
 
                 d3.select('svg').attr('width', svgWidth)
@@ -157,9 +159,6 @@
                                     .node()
 
                                 circle["__data__"] = { path: path, index: j-1, x: sceneCoords.x, y: sceneCoords.y }
-
-                                // es-lint-disable-next-line
-                                console.log(d3.select(circle))
                             }
                         }
                     }
@@ -257,6 +256,7 @@
     }
 
     .labels {
+        background-color: white;
         font-family: 'Segoe UI';
     }
 
