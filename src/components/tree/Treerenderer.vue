@@ -184,7 +184,7 @@
                                 .append('text')
                                 .classed('label', true)
                                 .text(chapter.datum().data.chapter)
-                                .attr('x', chapter.datum().x)
+                                .attr('x', chapter.datum().x + chapterRadius + 2)
                                 .attr('dy', chapter.datum().y)
                                 .node()
                         })
