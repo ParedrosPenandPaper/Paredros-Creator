@@ -156,7 +156,7 @@
                                     .attr('r', sceneRadius)
                                     .node()
 
-                                circle["__data__"] = { path: path, index: j-1 }
+                                circle["__data__"] = { path: path, index: j-1, x: sceneCoords.x, y: sceneCoords.y }
 
                                 // es-lint-disable-next-line
                                 console.log(d3.select(circle))
@@ -202,6 +202,25 @@
                             vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
                             vueComponent.renderTree()
                     })
+
+                    
+                    d3.selectAll('svg g.scenes circle')
+                        .on('mouseenter', function () {
+                            let sceneNode = d3.select(this)
+                            let data = sceneNode.data()[0]
+
+                            tmp = d3.select('svg g.labels')
+                                .append('text')
+                                .classed('label', true)
+                                .text(data.path[data.index].scene)
+                                    .attr('x', data.x + sceneRadius + 2)
+                                    .attr('dy', data.y)
+                                    .attr('font-familiy', 'Segoe UI')
+                                    .node()
+                        })
+                        .on('mouseleave', function () {
+                            d3.select(tmp).remove()
+                        })
                 }
             }
         }
