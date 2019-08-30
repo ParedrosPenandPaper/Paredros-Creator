@@ -1,6 +1,6 @@
 <template>
     <div class="tree-renderer-container">
-        <svg class="canvas" width="100%" height="100%">
+        <svg class="canvas" ondragover="return false" width="100%" height="100%">
             <g class="tree">
                 <g class="links"></g>
                 <g class="chapters"></g>
@@ -176,17 +176,9 @@
                 function addEventHandlers(){
                     let tmp
 
+
+                    // regular events chapter
                     d3.selectAll('svg g.chapters circle')
-                        .on('dragenter', function () {
-                            d3.select(this)
-                                .attr('r', 25)
-                                .style("fill", "red")
-                        })
-                        .on('dragleave', function () {
-                            d3.select(this)
-                                .attr('r', 14)
-                                .style('fill', 'steelblue')
-                        })
                         .on('mouseenter', function () {
                             let chapter = d3.select(this)
 
@@ -207,6 +199,27 @@
                             vueComponent.renderTree()
                     })
 
+
+                    //TODO: überprüfen ob richtiges Dragobjekt (chapter) gezogen wurde
+                    // drag events chapter
+                    d3.selectAll('svg g.chapters circle')
+                            .on('dragenter', function () {
+                                d3.select(this)
+                                    .attr('r', 25)
+                                    .style("fill", "red")
+                            })
+                            .on('dragleave', function () {
+                                d3.select(this)
+                                    .attr('r', 14)
+                                    .style('fill', 'steelblue')
+                            })
+                            .on('drop', function () {
+                                vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
+                                vueComponent.renderTree()
+                            })
+
+
+                    // regular events scenes
                     d3.selectAll('svg g.scenes circle')
                         .on('mouseenter', function () {
                             let sceneNode = d3.select(this)
@@ -228,6 +241,16 @@
                             vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
                             vueComponent.renderTree()
                         })
+
+
+                    //TODO: überprüfen ob richtiges Dragobjekt (scene) gezogen wurde
+                    // drag events scenes
+                    d3.selectAll('svg g.scenes circle')
+                        .on('drop', function () {
+                            vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
+                            vueComponent.renderTree()
+                        })
+
 
                     let collapsedLinks = []
                     d3.selectAll('svg g.links path')
@@ -262,6 +285,8 @@
                         else{ // a collapsed link hast been clicked
                             let clickedIndex = collapsedLinks.findIndex(element => element[1] === this)
 
+
+                            // eslint-disable-next-line no-console
                             console.log(collapsedLinks[clickedIndex])
 
                             let collapsedLink = collapsedLinks[clickedIndex][1]
