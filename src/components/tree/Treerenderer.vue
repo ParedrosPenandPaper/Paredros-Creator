@@ -333,8 +333,8 @@
     .links {
         fill: none;
         stroke: black;
-        stroke-width: 5px;
-        stroke-linecap: "butt";
+        stroke-width: 1px;
+        stroke-linecap: butt;
 
         cursor: pointer;
     }
