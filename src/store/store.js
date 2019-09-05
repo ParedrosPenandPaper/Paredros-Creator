@@ -6,7 +6,12 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         adventureObject: {},
-        currentDragSelection: {}
+        currentDragSelection: {},
+        guiState: {
+            collapsedLinks:[
+
+            ]
+        }
     },
     mutations: {
         setAdventureObject(state, response) {
@@ -23,6 +28,22 @@ export const store = new Vuex.Store({
         },
         resetDragSelection(state) {
             state.currentDragSelection = null
+        },
+        setCollapsedLinks(state, mapping){
+            let collapsedLinks = state.guiState.collapsedLinks
+            let alreadyAddedMapping = collapsedLinks.find(element => element.parent.data === mapping.parent.data && element.child.data === mapping.child.data)
+            
+            if(alreadyAddedMapping){
+                alreadyAddedMapping.collapsed = true
+            }
+            else{
+                collapsedLinks.push(mapping)
+            }
+        },
+        setExpandedLinks(state, mapping){
+            let collapsedLinks = state.guiState.collapsedLinks
+            let alreadyAddedMapping = collapsedLinks.find(element => element.parent.data === mapping.parent.data && element.child.data === mapping.child.data)
+            alreadyAddedMapping.collapsed = false
         }
     },
     actions: {

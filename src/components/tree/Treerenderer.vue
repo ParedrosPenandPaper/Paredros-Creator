@@ -39,7 +39,7 @@
                 // length constants
                 const svgWidth = d3.select('div.tree-renderer-container').style('width').replace('px', '')
                 const svgHeight = d3.select('div.tree-renderer-container').style('height').replace('px', '')
-                const chapterRadius = 14
+                const chapterRadius = 20
                 const sceneRadius = chapterRadius / 2
                 const treeScaleFactor = 1
                 const vueComponent = this
@@ -108,6 +108,17 @@
                         else{
                             drawPath(child, null, parent, 0)
                         }
+                        for(let mapping of vueComponent.$store.state.guiState.collapsedLinks){ // 
+
+                            if(mapping.parent.data === parent.data && mapping.child.data === child.data && mapping.collapsed === true){
+                                let collapsedLinkNode = d3.select('svg g.links')
+                                    .append('path')
+                                        .attr('d', `M ${parent.x} ${parent.y} L ${child.x} ${child.y}`)
+                                        .on('click', handleCollapse)
+                                        .node()
+                                collapsedLinkNode['__data__'] = { parent: parent, child: child }
+                            }
+                        }
                     }
                 }
 
@@ -124,6 +135,13 @@
                     let svgLink =  d3.select('svg g.links')
                                         .append('path')
                                             .attr('d', pathString)
+                                            .style('display', function() {
+                                                for(let mapping of vueComponent.$store.state.guiState.collapsedLinks){
+                                                    if(mapping.parent.data === parent.data && mapping.child.data === child.data && mapping.collapsed === true) return 'none'
+                                                }
+                                                return 'inline'
+                                            })
+                                            .on('click', handleCollapse)
                                             .node()
 
                     svgLink['__data__'] = { parent: parent, child: child}
@@ -161,6 +179,7 @@
                                     .attr('cx', sceneCoords.x)
                                     .attr('cy', sceneCoords.y)
                                     .attr('r', sceneRadius)
+                                    .style('display', d3.select(svgLink).style('display'))
                                     .node()
 
                                 svgScene['__data__'] = { path: path, index: j-1, x: sceneCoords.x, y: sceneCoords.y }
@@ -240,7 +259,6 @@
                             d3.select(tmp).remove()
                         })
 
-
                     // drag events scenes
                     d3.selectAll('svg g.scenes circle')
                         .on('drop', function () {
@@ -249,66 +267,50 @@
                                 vueComponent.renderTree()
                             }
                         })
+                }
 
+                function handleCollapse () {
+                        let collapsedLinks = vueComponent.$store.state.guiState.collapsedLinks
+                        let linkData = d3.select(this).datum()
+                        let mapping = collapsedLinks.find(element => element.parent.data === linkData.parent.data && element.child.data === linkData.child.data)
+                        
+                        let affectedSvgLinks = d3.selectAll('svg g.links path')
+                            .filter( function(d) {
+                                return d.parent.data === linkData.parent.data && d.child.data === linkData.child.data
+                            })
 
-                    let collapsedLinks = []
-                    d3.selectAll('svg g.links path')
-                        .on('click', handleCollapse)
-                    
-                    function handleCollapse () {
-
-                        let result = collapsedLinks.find(element => element[1] === this)
-                        if(!result){ // a not yet collapsed link has been clicked
-                            let linkData = d3.select(this).datum()
-
-                            let affectedSvgLinks = d3.selectAll('svg g.links path')
-                                .filter( function(d) {
-                                    return d.parent === linkData.parent && d.child === linkData.child
-                                })
-
+                        if(!mapping || !mapping.collapsed){ // a expanded link has been clicked
+                            // make all expanded links and scenes invisible
                             affectedSvgLinks.style('display', 'none')
-
                             for(let data of affectedSvgLinks.data()){
                                 let affectedSvgScenes = data.svgScenes
-                                affectedSvgScenes.forEach(svgScene => d3.select(svgScene).style('display', 'none'))
+                                if(affectedSvgScenes) affectedSvgScenes.forEach(svgScene => d3.select(svgScene).style('display', 'none'))
                             }
 
-                            let collapsedLink = d3.select('svg g.links') // collapsed link
+                            let collapsedLink = d3.select('svg g.links')
                                 .append('path')
                                     .attr('d', `M ${linkData.parent.x} ${linkData.parent.y} L ${linkData.child.x} ${linkData.child.y}`)
                                     .on('click', handleCollapse)
                                     .node()
                             collapsedLink['__data__'] = linkData
-                            collapsedLinks.push([this, collapsedLink])
+
+                            mapping = { parent: linkData.parent, child: linkData.child, collapsed: true }
+                            vueComponent.$store.commit('setCollapsedLinks', mapping)
                         }
-                        else{ // a collapsed link hast been clicked
-                            let clickedIndex = collapsedLinks.findIndex(element => element[1] === this)
+                        else{ // a collapsed link has been clicked
+                            d3.select(this).remove()
 
-
-                            // eslint-disable-next-line no-console
-                            console.log(collapsedLinks[clickedIndex])
-
-                            let collapsedLink = collapsedLinks[clickedIndex][1]
-                            collapsedLinks.splice(clickedIndex, 1)
-
-                            d3.select(collapsedLink).remove()
-
-                            let linkData = d3.select(this).datum()
-
-                            let affectedSvgLinks = d3.selectAll('svg g.links path')
-                                .filter( function(data) {
-                                    return data.parent === linkData.parent && data.child === linkData.child
-                                })
-
+                            //redraw
                             affectedSvgLinks.style('display', 'inline')
-
                             for(let data of affectedSvgLinks.data()){
                                 let affectedSvgScenes = data.svgScenes
-                                affectedSvgScenes.forEach(svgScene => d3.select(svgScene).style('display', 'inline'))
+                                if(affectedSvgScenes) affectedSvgScenes.forEach(svgScene => d3.select(svgScene).style('display', 'inline'))
                             }
+                            
+                            mapping = { parent: linkData.parent, child: linkData.child, collapsed: false }
+                            vueComponent.$store.commit('setExpandedLinks', mapping)
                         }
                     }
-                }
             }
         }
     }
@@ -330,8 +332,9 @@
 
     .links {
         fill: none;
-        stroke: #ccc;
-        stroke-width: 3px;
+        stroke: black;
+        stroke-width: 5px;
+        stroke-linecap: "butt";
 
         cursor: pointer;
     }
