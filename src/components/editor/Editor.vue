@@ -1,18 +1,19 @@
 <template>
     <div id="editor-container">
-        <p v-for="(panelContent, index) in panelContents" :key="index">
-            {{panelContent.formatted()}}
-        </p>
+        <editor-panel v-for="(item, index) in storyItems" :key="index" :storyItem="item">
+
+        </editor-panel>
     </div>
 </template>
 
 <script>
-    import * as d3 from 'd3'
+    // import * as d3 from 'd3'
+    import EditorPanel from './Editorpanel.vue'
 
     export default {
         data: function() {
             return {
-                panelContents: []
+                storyItems: []
             }
         },
         computed: {
@@ -21,18 +22,19 @@
             }
         },
         components: {
+            EditorPanel
         },
         methods: {
             
         },
         mounted() {
             this.$nextTick(() => {
-                this.panelContents = renderEditorPanelsRecursively (this.adventure, new Array())
+                this.storyItems = flattenAdventureRecursively(this.adventure, new Array())
             })
         }
     }
 
-    function renderEditorPanelsRecursively (chapter, panelContents) {
+    function flattenAdventureRecursively(chapter, storyItems) {
         // // panel for this chapter
         // let chapterPanelSelection = d3.select('#editor-container')
         //     .append('div')
@@ -53,21 +55,21 @@
         chapter.paths.forEach(path => {
             path.forEach(scene => 
             {
-                let scenePanelContent = new PanelContent('scene', scene.title, scene.text)
-                panelContents.push(scenePanelContent)
+                let storyItem = new StoryItem('scene', scene.title, scene.text)
+                storyItems.push(storyItem)
             })
         })
         
-        let chapterPanelContent = new PanelContent('chapter', chapter.title, chapter.text)
-        panelContents.push(chapterPanelContent)
+        let storyItem = new StoryItem('chapter', chapter.title, chapter.text)
+        storyItems.push(storyItem)
 
         let children = chapter.children
-        if(children && children.length > 0) children.forEach(child => renderEditorPanelsRecursively(child, panelContents))
+        if(children && children.length > 0) children.forEach(child => flattenAdventureRecursively(child, storyItems))
 
-        return panelContents
+        return storyItems
     }
 
-    function PanelContent(type, title, text){
+    function StoryItem(type, title, text){
         this.type = type
         this.title = title
         this.text = text
