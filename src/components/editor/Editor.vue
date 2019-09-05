@@ -1,6 +1,8 @@
 <template>
     <div id="editor-container">
-
+        <p v-for="(panelContent, index) in panelContents" :key="index">
+            {{panelContent.formatted()}}
+        </p>
     </div>
 </template>
 
@@ -8,6 +10,11 @@
     import * as d3 from 'd3'
 
     export default {
+        data: function() {
+            return {
+                panelContents: []
+            }
+        },
         computed: {
             adventure() {
                 return this.$store.state.adventureObject[1]
@@ -20,21 +27,51 @@
         },
         mounted() {
             this.$nextTick(() => {
-                renderEditorPanelsRecursively (this.adventure)
+                this.panelContents = renderEditorPanelsRecursively (this.adventure, new Array())
             })
         }
     }
 
-    function renderEditorPanelsRecursively (chapter) {
-        // panel for this chapter
-        d3.select('#editor-container')
-            .append('div')
-            .text(chapter.text)
+    function renderEditorPanelsRecursively (chapter, panelContents) {
+        // // panel for this chapter
+        // let chapterPanelSelection = d3.select('#editor-container')
+        //     .append('div')
+        //     .attr('contenteditable', 'true')
+        //     .text(chapter.title + '\n' + chapter.text)
+        //     .classed('editor-panel', true)
 
-            // panels for all scenes one after the other
+        // // panels for all scenes one after the other
+        // chapter.paths.forEach(path => {
+        //     path.forEach(scene => {
+        //         chapterPanelSelection
+        //             .append('div')
+        //             .attr('contenteditable', 'true')
+        //             .text(scene.title + '\n' + scene.text)
+        //             .classed('editor-panel scene-panel', true)
+        //     })
+        // })
+        let chapterPanelContent = new PanelContent('chapter', chapter.title, chapter.text)
+        panelContents.push(chapterPanelContent)
+
+        chapter.paths.forEach(path => {
+            path.forEach(scene => 
+            {
+                let scenePanelContent = new PanelContent('scene', scene.title, scene.text)
+                panelContents.push(scenePanelContent)
+            })
+        })
 
         let children = chapter.children
-        if(children && children.length > 0) children.forEach(child => renderEditorPanelsRecursively(child))
+        if(children && children.length > 0) children.forEach(child => renderEditorPanelsRecursively(child, panelContents))
+
+        return panelContents
+    }
+
+    function PanelContent(type, title, text){
+        this.type = type
+        this.title = title
+        this.text = text
+        this.formatted = () => `${title}: ${text}`
     }
 
 </script>
