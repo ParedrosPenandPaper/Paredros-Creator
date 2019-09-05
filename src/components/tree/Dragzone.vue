@@ -1,16 +1,27 @@
 <template>
     <div class="drag-zone-container">
-        <drag-item v-for="(item,index) in dragItems" :key="index" :label="item"></drag-item>
+        <drag-item v-for="(item,index) in dragItems" :key="index" :template="item"></drag-item>
+        <!---<drag-item :template="'CHAR'"></drag-item>
+        <drag-item :template="'LOC'"></drag-item>
+        <drag-item :template="'ITEM'"></drag-item>--->
     </div>
 </template>
 
 <script>
     import DragItem from './Dragitem.vue'
+    import * as dataElements from "../../util/DataElements";
 
     export default {
         data: function(){
             return {
-                dragItems: [ 'CH', 'SC', 'CHAR', 'LOC', 'ITEM' ]
+                dragItems: [ {
+                    label: dataElements.chapterLabel,
+                    constructor: dataElements.Chapter
+                },
+                {
+                    label: dataElements.sceneLabel,
+                    constructor: dataElements.Scene
+                }]
             }
         },
         components: {

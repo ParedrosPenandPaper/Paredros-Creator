@@ -5,29 +5,24 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        adventureObject: {}
+        adventureObject: {},
+        currentDragSelection: {}
     },
     mutations: {
         setAdventureObject(state, response) {
             state.adventureObject = response
         },
         addChapterAfter(state, chapter) {
-            // TODO: Zusammenbau des chapters auslagern
-            let newChapter = {
-                chapter: 'newChapter',
-                children: [],
-                content: [],
-                paths: [],
-                text: ""
-            }
-            chapter.children.push(newChapter)
+            chapter.children.push(this.state.currentDragSelection)
         },
         addSceneAfter(state, scene) {
-            // TODO: Zusammenbau der Szene auslagern
-            let newScene = {
-                "scene": "neue Szene eingefügt"
-            }
-            scene.path.splice(scene.index + 1, 0, newScene)
+            scene.path.splice(scene.index + 1, 0, this.state.currentDragSelection)
+        },
+        setDragSelection(state, selection) {
+            state.currentDragSelection = selection
+        },
+        resetDragSelection(state) {
+            state.currentDragSelection = null
         }
     },
     actions: {

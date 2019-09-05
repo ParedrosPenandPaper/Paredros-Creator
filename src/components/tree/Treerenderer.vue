@@ -1,10 +1,10 @@
 <template>
     <div class="tree-renderer-container">
-        <svg class="canvas" ondragover="return false" width="100%" height="100%">
+        <svg class="canvas" width="100%" height="100%">
             <g class="tree">
                 <g class="links"></g>
-                <g class="chapters"></g>
-                <g class="scenes"></g>
+                <g class="chapters" ondragover="return false"></g>
+                <g class="scenes" ondragover="return false"></g>
                 <g class="labels"></g>
             </g>
             <g class="adventure"></g>
@@ -15,6 +15,7 @@
 <script>
     import * as d3 from 'd3'
     import * as math from '../../util/Vectormath.js'
+    import * as dataElements from "../../util/DataElements";
 
     export default {
         computed: {
@@ -176,6 +177,10 @@
                 function addEventHandlers(){
                     let tmp
 
+                    d3.select(window)
+                        .on('dragend', function () {
+                            vueComponent.$store.commit('resetDragSelection')
+                        })
 
                     // regular events chapter
                     d3.selectAll('svg g.chapters circle')
@@ -194,13 +199,8 @@
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
                         })
-                        .on('click', function () {
-                            vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
-                            vueComponent.renderTree()
-                    })
 
 
-                    //TODO: überprüfen ob richtiges Dragobjekt (chapter) gezogen wurde
                     // drag events chapter
                     d3.selectAll('svg g.chapters circle')
                             .on('dragenter', function () {
@@ -214,8 +214,10 @@
                                     .style('fill', 'steelblue')
                             })
                             .on('drop', function () {
-                                vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
-                                vueComponent.renderTree()
+                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Chapter) {
+                                    vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
+                                    vueComponent.renderTree()
+                                }
                             })
 
 
@@ -237,18 +239,15 @@
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
                         })
-                        .on('click', function () {
-                            vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
-                            vueComponent.renderTree()
-                        })
 
 
-                    //TODO: überprüfen ob richtiges Dragobjekt (scene) gezogen wurde
                     // drag events scenes
                     d3.selectAll('svg g.scenes circle')
                         .on('drop', function () {
-                            vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
-                            vueComponent.renderTree()
+                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
+                                vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
+                                vueComponent.renderTree()
+                            }
                         })
 
 

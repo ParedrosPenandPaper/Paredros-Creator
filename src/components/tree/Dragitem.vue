@@ -1,7 +1,7 @@
 <template>
-    <div class="item-container" draggable>
+    <div class="item-container" draggable="true" @dragstart="handleDragstart">
         <p class="label-container" draggable="false">
-            {{label}}
+            {{template.label}}
         </p>
     </div>
 </template>
@@ -9,7 +9,15 @@
 <script>
     export default {
         props:{
-            label: String
+            template: {
+                label: String,
+                constructor: function() {}
+            }
+        },
+        methods: {
+            handleDragstart() {
+                this.$store.commit('setDragSelection', new this.template.constructor())
+            }
         }
     }
 </script>
