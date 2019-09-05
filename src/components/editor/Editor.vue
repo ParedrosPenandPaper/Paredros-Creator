@@ -50,9 +50,6 @@
         //             .classed('editor-panel scene-panel', true)
         //     })
         // })
-        let chapterPanelContent = new PanelContent('chapter', chapter.title, chapter.text)
-        panelContents.push(chapterPanelContent)
-
         chapter.paths.forEach(path => {
             path.forEach(scene => 
             {
@@ -60,6 +57,9 @@
                 panelContents.push(scenePanelContent)
             })
         })
+        
+        let chapterPanelContent = new PanelContent('chapter', chapter.title, chapter.text)
+        panelContents.push(chapterPanelContent)
 
         let children = chapter.children
         if(children && children.length > 0) children.forEach(child => renderEditorPanelsRecursively(child, panelContents))
