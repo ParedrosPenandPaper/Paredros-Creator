@@ -8,9 +8,7 @@ export const store = new Vuex.Store({
         adventureObject: {},
         currentDragSelection: {},
         guiState: {
-            collapsedLinks:[
-
-            ]
+            collapsedLinks:[]
         }
     },
     mutations: {
