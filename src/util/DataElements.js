@@ -1,3 +1,9 @@
+export {blankAdventure}
+
+function blankAdventure() {
+    return [{adventure: 'newAdventure'}, new Chapter()]
+}
+
 export { chapterLabel, Chapter }
 
 const chapterLabel = 'CH';

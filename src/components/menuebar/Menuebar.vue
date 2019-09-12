@@ -1,16 +1,40 @@
 <template>
     <div class="menuebar-container">
-        <button>new</button>
-        <button class="import" @click="$emit('get-test-adventure')">load</button>
-        <button>save</button>
-        <button>import</button>
-        <button>export</button>
+        <button class="new" @click="createNewAdventure()">new</button>
+        <button class="load" @click="loadAdventure()">load</button>
+        <button class="save" @click="saveAdventure()">save</button>
+        <button class="import" @click="importAdventure()">import</button>
+        <button class="export" @click="exportAdventure()">export</button>
     </div>
 </template>
 
 <script>
+    import * as dataElements from "../../util/DataElements";
+
     export default {
-        name: "Menuebar"
+        name: "Menuebar",
+        methods: {
+            createNewAdventure() {
+                this.$store.state.adventureObject = dataElements.blankAdventure()
+                // TODO: Update rendertree nach änderung
+            },
+            loadAdventure() {
+                alert("Not implemented yet")
+            },
+            saveAdventure() {
+                alert("Not implemented yet")
+            },
+            importAdventure() {
+                alert("Not implemented yet")
+            },
+            exportAdventure() {
+                let element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-u,'
+                    +encodeURIComponent(JSON.stringify(this.$store.state.adventureObject)));
+                element.setAttribute('download', this.$store.state.adventureObject[0].adventure + ".json");
+                element.click()
+            }
+        }
     }
 </script>
 
