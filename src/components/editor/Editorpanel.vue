@@ -1,7 +1,7 @@
 <template>
     <div class="editor-panel" :class="{ 'chapter-panel': isChapter, 'scene-panel': isScene }">
-        <p>{{storyItem.title}}</p>
-        <p>{{storyItem.text}}</p>
+        <p contenteditable="true" @focusout="testEventTitle">{{storyItem.title}}</p>
+        <p contenteditable="true" @focusout="testEventText">{{storyItem.text}}</p>
     </div>
 </template>
 
@@ -20,7 +20,16 @@
             type: function(){ return this.storyItem.type }
         },
         methods: {
-
+            testEventTitle: function (inputEvent) {
+                console.log(inputEvent)
+                let message = `old title: ${this.storyItem.title}\n new title: ${inputEvent}`
+                alert(message)
+            },
+            testEventText: function (inputEvent) {
+                console.log(inputEvent)
+                let message = `old text: ${this.storyItem.text}\n new text: ${inputEvent}`
+                alert(message)
+            }
         }
     }
 </script>
