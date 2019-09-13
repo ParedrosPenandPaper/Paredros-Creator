@@ -13,7 +13,8 @@
         data: function() {
             return {
                 isChapter: this.storyItem.type === 'chapter',
-                isScene: this.storyItem.type === 'scene'
+                isScene: this.storyItem.type === 'scene',
+                oldStoryItem: {}
             }
         },
         computed: {
