@@ -8,12 +8,16 @@ export const store = new Vuex.Store({
         adventureObject: {},
         currentDragSelection: {},
         guiState: {
-            collapsedLinks:[]
-        }
+            collapsedLinks:[
+
+            ]
+        },
+        updateTreeView: false
     },
     mutations: {
         setAdventureObject(state, response) {
             state.adventureObject = response
+            updateTreeView = true
         },
         addChapterAfter(state, chapter) {
             chapter.children.push(this.state.currentDragSelection)
