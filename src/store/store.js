@@ -26,13 +26,9 @@ export const store = new Vuex.Store({
             state.adventureObject = [...state.adventureObject]
         },
         addSceneAfterChapter(state, chapter) {
-            // eslint-disable-next-line no-console
-            console.log(chapter.children[0].data)
-            let chapterAfter = chapter.children[0].data
-            if(chapterAfter.paths.length === 0 ) {
-                // eslint-disable-next-line no-console
-                console.log(chapterAfter)
-            }
+            let chapterAfter = chapter.children[0]
+            chapterAfter.data.paths.push([this.state.currentDragSelection])
+            state.adventureObject = [...state.adventureObject]
         },
         setDragSelection(state, selection) {
             state.currentDragSelection = selection
