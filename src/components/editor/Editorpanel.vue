@@ -1,26 +1,14 @@
 <template>
-    <div class="editor-panel" :class="{ 'chapter-panel': isChapter, 'scene-panel': isScene }">
+    <div class="editor-panel" :class="{ 'chapter-panel': storyItem.hasOwnProperty('children'), 'scene-panel': !storyItem.hasOwnProperty('children') }">
         <p contenteditable="true" @focusout="testEventTitle">{{storyItem.title}}</p>
         <p contenteditable="true" @focusout="testEventText">{{storyItem.text}}</p>
     </div>
 </template>
 
 <script>
-    import * as DataElements from '../../util/DataElements.js'
-
     export default {
         props: {
             storyItem: Object
-        },
-        data: function() {
-            return {
-                isChapter: this.storyItem instanceof DataElements.Chapter,
-                isScene: this.storyItem instanceof DataElements.Scene,
-                oldStoryItem: {}
-            }
-        },
-        computed: {
-            type: function(){ return this.storyItem.type }
         },
         methods: {
             testEventTitle: function (focusOutEvent) {

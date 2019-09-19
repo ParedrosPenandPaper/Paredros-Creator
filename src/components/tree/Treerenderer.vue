@@ -267,12 +267,6 @@
                                 vueComponent.renderTree()
                             }
                         })
-                    d3.selectAll('svg g.chapters circle')
-                        .on('drop', function () {
-                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
-                                vueComponent.$store.commit('addSceneAfterChapter', d3.select(this).datum())
-                            }
-                        })
                 }
 
                 function handleCollapse () {

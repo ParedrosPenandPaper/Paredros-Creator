@@ -16,7 +16,6 @@ export const store = new Vuex.Store({
     mutations: {
         setAdventureObject(state, response) {
             state.adventureObject = response
-            updateTreeView = true
         },
         addChapterAfter(state, chapter) {
             chapter.children.push(this.state.currentDragSelection)

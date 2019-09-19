@@ -7,9 +7,7 @@
 </template>
 
 <script>
-    // import * as d3 from 'd3'
     import EditorPanel from './Editorpanel.vue'
-    import * as DataElements from '../../util/DataElements.js'
 
     export default {
         components: {
@@ -36,11 +34,11 @@
         chapter.paths.forEach(path => {
             path.forEach(scene => 
             {
-                storyItems.push(new DataElements.Scene(scene.title, scene.text))
+                storyItems.push(scene)
             })
         })
         
-        storyItems.push(new DataElements.Chapter(chapter.title, chapter.children, chapter.content, chapter.paths, chapter.text))
+        storyItems.push(chapter)
 
         let children = chapter.children
         if(children && children.length > 0) children.forEach(child => flattenAdventureRecursively(child, storyItems))

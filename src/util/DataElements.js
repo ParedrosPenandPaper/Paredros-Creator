@@ -1,7 +1,7 @@
 export { chapterLabel, Chapter }
 
 const chapterLabel = 'CH';
-function Chapter(title, children, content, paths, text) {
+function Chapter(title='new chapter', children=[], content=[], paths=[], text='lorem ipsum ...') {
     this.title = title
     this.children = children
     this.content = content
@@ -12,7 +12,7 @@ function Chapter(title, children, content, paths, text) {
 export { sceneLabel, Scene }
 
 const sceneLabel = 'SC';
-function Scene(title, text) {
+function Scene(title='new scene', text='lorem ipsum ...') {
     this.title = title
     this.text = text
 }
