@@ -218,6 +218,10 @@
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
                         })
+                        .on('contextmenu', function () {
+                            d3.event.preventDefault()
+                            alert('do you really want to delete this shit?')
+                        })
 
 
                     // drag events chapter
