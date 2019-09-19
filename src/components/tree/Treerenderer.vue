@@ -229,7 +229,7 @@
                             })
                             .on('dragleave', function () {
                                 d3.select(this)
-                                    .attr('r', 14)
+                                    .attr('r', chapterRadius)
                                     .style('fill', 'steelblue')
                             })
                             .on('drop', function () {
@@ -311,7 +311,11 @@
                             vueComponent.$store.commit('setExpandedLinks', mapping)
                         }
                     }
+                    vueComponent.$store.state.updateAdventure = false
             }
+        },
+        watch: {
+
         }
     }
 
@@ -333,7 +337,7 @@
     .links {
         fill: none;
         stroke: black;
-        stroke-width: 1px;
+        stroke-width: 2px;
         stroke-linecap: butt;
 
         cursor: pointer;
