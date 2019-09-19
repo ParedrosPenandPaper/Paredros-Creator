@@ -11,8 +11,7 @@ export const store = new Vuex.Store({
             collapsedLinks:[
 
             ]
-        },
-        updateTreeView: false
+        }
     },
     mutations: {
         setAdventureObject(state, response) {
@@ -26,6 +25,15 @@ export const store = new Vuex.Store({
         addSceneAfter(state, scene) {
             scene.path.splice(scene.index + 1, 0, this.state.currentDragSelection)
             state.adventureObject = [...state.adventureObject]
+        },
+        addSceneAfterChapter(state, chapter) {
+            // eslint-disable-next-line no-console
+            console.log(chapter.children[0].data)
+            let chapterAfter = chapter.children[0].data
+            if(chapterAfter.paths.length === 0 ) {
+                // eslint-disable-next-line no-console
+                console.log(chapterAfter)
+            }
         },
         setDragSelection(state, selection) {
             state.currentDragSelection = selection
