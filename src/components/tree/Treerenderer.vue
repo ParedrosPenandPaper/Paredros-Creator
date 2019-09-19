@@ -267,6 +267,12 @@
                                 vueComponent.renderTree()
                             }
                         })
+                    d3.selectAll('svg g.chapters circle')
+                        .on('drop', function () {
+                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
+                                vueComponent.$store.commit('addSceneAfterChapter', d3.select(this).datum())
+                            }
+                        })
                 }
 
                 function handleCollapse () {
@@ -311,11 +317,14 @@
                             vueComponent.$store.commit('setExpandedLinks', mapping)
                         }
                     }
-                    vueComponent.$store.state.updateAdventure = false
             }
         },
         watch: {
-
+            adventure() {
+                this.renderTree()
+                // eslint-disable-next-line no-console
+                console.log("penisT")
+            }
         }
     }
 
