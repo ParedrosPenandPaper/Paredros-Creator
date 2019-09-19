@@ -311,7 +311,11 @@
                             vueComponent.$store.commit('setExpandedLinks', mapping)
                         }
                     }
+                    vueComponent.$store.state.updateAdventure = false
             }
+        },
+        watch: {
+
         }
     }
 

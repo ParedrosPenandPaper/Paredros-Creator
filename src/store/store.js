@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
             collapsedLinks:[
 
             ]
-        }
+        },
+        updateTreeView: false
     },
     mutations: {
         setAdventureObject(state, response) {
