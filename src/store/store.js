@@ -17,9 +17,11 @@ export const store = new Vuex.Store({
         },
         addChapterAfter(state, chapter) {
             chapter.children.push(this.state.currentDragSelection)
+            state.adventureObject = [...state.adventureObject]
         },
         addSceneAfter(state, scene) {
             scene.path.splice(scene.index + 1, 0, this.state.currentDragSelection)
+            state.adventureObject = [...state.adventureObject]
         },
         setDragSelection(state, selection) {
             state.currentDragSelection = selection
