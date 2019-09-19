@@ -2,6 +2,7 @@ export {blankAdventure}
 
 function blankAdventure(title='newAdventure', author='anonymous') {
     return [
+        // TODO: outsource into own class
         {
             adventure: title,
             creationDate: new Date(),
