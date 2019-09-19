@@ -1,7 +1,14 @@
 export {blankAdventure}
 
-function blankAdventure() {
-    return [{adventure: 'newAdventure'}, new Chapter()]
+function blankAdventure(title='newAdventure', author='anonymous') {
+    return [
+        {
+            adventure: title,
+            creationDate: new Date(),
+            author: author
+        }, 
+        new Chapter()
+    ]
 }
 
 export { chapterLabel, Chapter }
