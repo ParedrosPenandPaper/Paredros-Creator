@@ -1,18 +1,33 @@
+export {blankAdventure}
+
+function blankAdventure(title='newAdventure', author='anonymous') {
+    return [
+        // TODO: outsource into own class
+        {
+            adventure: title,
+            creationDate: new Date(),
+            author: author
+        }, 
+        new Chapter()
+    ]
+}
+
 export { chapterLabel, Chapter }
 
 const chapterLabel = 'CH';
-function Chapter() {
-    this.title = '';
-    this.children = [];
-    this.content = [];
-    this.paths = [];
-    this.text = ''
+function Chapter(title='new chapter', children=[], content=[], paths=[], text='lorem ipsum ...') {
+    this.title = title
+    this.children = children
+    this.content = content
+    this.paths = paths
+    this.text = text
 }
 
 export { sceneLabel, Scene }
 
 const sceneLabel = 'SC';
-function Scene() {
-    this.title = '';
-    this.text = ''
+
+function Scene(title='new scene', text='lorem ipsum ...') {
+    this.title = title
+    this.text = text
 }
