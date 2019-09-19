@@ -237,6 +237,9 @@
                                     vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
                                     vueComponent.renderTree()
                                 }
+                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
+                                    vueComponent.$store.commit('addSceneAfterChapter', d3.select(this).datum())
+                                }
                             })
 
 
