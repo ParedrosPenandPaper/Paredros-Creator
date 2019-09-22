@@ -8,7 +8,9 @@ export const store = new Vuex.Store({
         adventureObject: {},
         currentDragSelection: {},
         guiState: {
-            collapsedLinks:[]
+            collapsedLinks:[
+
+            ]
         }
     },
     mutations: {
@@ -17,9 +19,16 @@ export const store = new Vuex.Store({
         },
         addChapterAfter(state, chapter) {
             chapter.children.push(this.state.currentDragSelection)
+            state.adventureObject = [...state.adventureObject]
         },
         addSceneAfter(state, scene) {
             scene.path.splice(scene.index + 1, 0, this.state.currentDragSelection)
+            state.adventureObject = [...state.adventureObject]
+        },
+        addSceneAfterChapter(state, chapter) {
+            let chapterAfter = chapter.children[0]
+            chapterAfter.data.paths.push([this.state.currentDragSelection])
+            state.adventureObject = [...state.adventureObject]
         },
         setDragSelection(state, selection) {
             state.currentDragSelection = selection
