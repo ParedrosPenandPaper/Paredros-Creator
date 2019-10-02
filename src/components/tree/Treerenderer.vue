@@ -222,6 +222,10 @@
                             d3.event.preventDefault()
                             alert('do you really want to delete this shit?')
                         })
+                        // TODO: Click to delete function
+                        .on('click', function () {
+                            vueComponent.$store.commit('deleteChapter', d3.select(this).datum())
+                        })
 
 
                     // drag events chapter

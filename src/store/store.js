@@ -30,6 +30,21 @@ export const store = new Vuex.Store({
             chapterAfter.data.paths.push([this.state.currentDragSelection])
             state.adventureObject = [...state.adventureObject]
         },
+        // TODO: delete chapters
+        deleteChapter(state, chapter) {
+            let parent = chapter.parent
+            let descendants = chapter.data.children
+            // eslint-disable-next-line no-console
+            console.log(chapter)
+            if (parent.data.children.length === 1) {
+                parent.data.children.length = 0
+                parent.data.children = descendants
+            }
+            else {
+                // TODO: Logik für mehrere children !!!
+            }
+            state.adventureObject = [...state.adventureObject]
+        },
         setDragSelection(state, selection) {
             state.currentDragSelection = selection
         },
