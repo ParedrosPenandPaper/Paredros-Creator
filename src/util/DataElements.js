@@ -31,3 +31,12 @@ function Scene(title='new scene', text='lorem ipsum ...') {
     this.title = title
     this.text = text
 }
+
+export { characterLabel, Character}
+
+const characterLabel = 'NPC'
+
+function Character(name='new character', text='a new npc enters the world') {
+    this.name = name
+    this.text = text
+}

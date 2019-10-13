@@ -3,6 +3,7 @@
         <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
         <tree id="tree"></tree>
         <editor></editor>
+        <modal class="modal-window"></modal>
     </div>
 </template>
 
@@ -11,6 +12,7 @@
     import Editor from './components/editor/Editor.vue'
     import Menuebar from './components/menuebar/Menuebar.vue'
     import Tree from './components/tree/Tree.vue'
+    import Modal from './components/modal/modalContainer.vue'
 
     //import localDataOne from '../data/example1.json'
     //import localDataTwo from '../data/example2.json'
@@ -19,12 +21,15 @@
     export default {
         name: 'app',
         data: function() {
-            return {}
+            return {
+                value: false
+            }
         },
         components: {
             Editor,
             Menuebar,
-            Tree
+            Tree,
+            Modal
         },
         methods: {
             getTestAdventure(){
@@ -66,5 +71,15 @@
         grid-area: editor;
         border: 1px solid black;
         padding: 5px;
+    }
+
+    .modal-container {
+        position: absolute;
+        top: 100px;
+        left: 200px;
+        padding: 60px;
+        z-index: 100;
+        background-color: lightgrey;
+        border: solid 2px dimgrey;
     }
 </style>

@@ -248,6 +248,9 @@
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
                                     vueComponent.$store.commit('addSceneAfterChapter', d3.select(this).datum())
                                 }
+                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                    vueComponent.$store.commit('showModal')
+                                }
                             })
 
 
@@ -276,6 +279,9 @@
                             if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
                                 vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
                                 vueComponent.renderTree()
+                            }
+                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                vueComponent.$store.commit('showModal')
                             }
                         })
                 }

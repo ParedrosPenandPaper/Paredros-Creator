@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
             collapsedLinks:[
 
             ]
-        }
+        },
+        showModal: false
     },
     mutations: {
         setAdventureObject(state, response) {
@@ -66,6 +67,14 @@ export const store = new Vuex.Store({
             let collapsedLinks = state.guiState.collapsedLinks
             let alreadyAddedMapping = collapsedLinks.find(element => element.parent.data === mapping.parent.data && element.child.data === mapping.child.data)
             alreadyAddedMapping.collapsed = false
+        },
+        showModal(state){
+            state.showModal = true
+            state.adventureObject = [...state.adventureObject]
+        },
+        hideModal(state){
+            state.showModal = false
+            state.adventureObject = [...state.adventureObject]
         }
     },
     actions: {
