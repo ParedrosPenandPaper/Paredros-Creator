@@ -1,9 +1,9 @@
 <template>
-    <div class="modal-container" v-show="this.$store.state.modal.show">
-        <div v-if="this.$store.state.modal.type instanceof nscType">
-            <modal-n-s-c></modal-n-s-c>
+    <div>
+        <div v-show="this.$store.state.modal.type instanceof nscType">
+            <modal-non-player-character></modal-non-player-character>
         </div>
-        <div v-if="this.$store.state.modal.type instanceof locationType">
+        <div v-show="this.$store.state.modal.type instanceof locationType">
             <modal-location></modal-location>
         </div>
         <input type="submit" @click="declineModal()" value="Cancel">
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import modalNSC from './modalNSC.vue'
+    import modalNonPlayerCharacter from './modalNonPlayerCharacter.vue'
     import modalLocation from './modalLocation.vue'
 
     import * as dataElements from "../../util/DataElements";
@@ -26,7 +26,7 @@
             }
         },
         components: {
-            modalNSC,
+            modalNonPlayerCharacter,
             modalLocation
         },
         methods: {

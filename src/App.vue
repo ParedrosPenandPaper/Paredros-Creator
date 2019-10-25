@@ -3,7 +3,7 @@
         <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
         <tree id="tree"></tree>
         <editor></editor>
-        <modal class="modal-container"></modal>
+        <modal class="modal-container" v-show="this.$store.state.modal.show"></modal>
     </div>
 </template>
 

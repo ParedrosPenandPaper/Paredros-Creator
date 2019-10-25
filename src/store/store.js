@@ -79,10 +79,13 @@ export const store = new Vuex.Store({
         },
         closeModal(state, confirm){
             state.modal.show = false
-            state.modal.type = null
             state.modal.confirmed = confirm
+            if (!confirm) {
+                state.modal.type = null
+            }
             state.adventureObject = [...state.adventureObject]
         },
+        // TODO: Refactor duplikate
         addPlayerCharacter(state, nonPlayerCharacter) {
             if (state.adventureObject.length > 2) {
                 state.adventureObject[2].push(nonPlayerCharacter)
@@ -92,6 +95,19 @@ export const store = new Vuex.Store({
                 state.adventureObject.push([nonPlayerCharacter])
             }
             state.modal.confirmed = false
+            state.modal.type = null
+            state.adventureObject = [...state.adventureObject]
+        },
+        addLocation(state, location) {
+            if (state.adventureObject.length > 2) {
+                state.adventureObject[2].push(location)
+            }
+            else
+            {
+                state.adventureObject.push([location])
+            }
+            state.modal.confirmed = false
+            state.modal.type = null
             state.adventureObject = [...state.adventureObject]
         }
     },

@@ -1,26 +1,47 @@
 <template>
     <div>
-        <p>Add a new location</p>
-        <form  @submit.prevent>
+        <form @submit.prevent>
+            <p>Add a new location</p>
             <label for="name">Name</label>
-            <input v-model="this.nameInput" type="text" id="name">
+            <input v-model="locationName" type="text" id="name">
             <br><br>
             <label for="description">Description</label>
-            <input v-model="this.descriptionInput" type="text" id="description">
+            <input v-model="locationDescription" type="text" id="description">
             <br><br>
         </form>
     </div>
 </template>
 
 <script>
+    import * as dataElements from '../../util/DataElements.js'
+
     export default {
         name: "modalLocation",
         data() {
             return {
-                nameInput: null,
-                descriptionInput: null
+                locationName: "",
+                locationDescription: ""
             }
-        }
+        },
+        methods: {
+            addNewLocation() {
+                let location = new dataElements.Location(this.locationName, this.locationDescription)
+                this.$store.commit("addLocation", location)
+                this.resetInputs()
+            },
+            resetInputs() {
+                this.locationName = ""
+                this.locationDescription = ""
+            }
+        },
+        created() {
+            this.$store.subscribe((mutation, state) => {
+                if (mutation.type === "closeModal" && state.modal.confirmed
+                    && this.$store.state.modal.type instanceof dataElements.Location) {
+                    this.addNewLocation()
+                }
+            })
+        },
     }
 </script>
 

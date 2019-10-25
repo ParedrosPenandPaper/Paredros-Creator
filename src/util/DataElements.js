@@ -47,7 +47,7 @@ export { locationLabel, Location}
 
 const locationLabel = 'LOC'
 
-function Location(name='new location', text='a new npc enters the world') {
+function Location(name='new location', text='this is a strange site') {
     this.objectID = ""
     this.name = name
     this.text = text
