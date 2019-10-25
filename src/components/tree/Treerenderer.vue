@@ -248,6 +248,8 @@
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
                                     vueComponent.$store.commit('addSceneAfterChapter', d3.select(this).datum())
                                 }
+                                // TODO: wahrscheinlich selection Mitgeben um Referenz in den Content abzulegen
+                                // TODO: diese Events sind für scenes und chapter gleich => ggf auslagern
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
                                     vueComponent.$store.commit('showModal')
                                 }
@@ -284,6 +286,9 @@
                                 vueComponent.renderTree()
                             }
                             if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                vueComponent.$store.commit('showModal')
+                            }
+                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
                                 vueComponent.$store.commit('showModal')
                             }
                         })
