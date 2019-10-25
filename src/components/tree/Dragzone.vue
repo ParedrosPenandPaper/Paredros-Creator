@@ -25,6 +25,10 @@
                 {
                     label: dataElements.characterLabel,
                     constructor: dataElements.Character
+                },
+                {
+                    label: dataElements.locationLabel,
+                    constructor: dataElements.Location
                 }]
             }
         },

@@ -36,7 +36,19 @@ export { characterLabel, Character}
 
 const characterLabel = 'NPC'
 
-function Character(name='new character', text='a new npc enters the world') {
+function Character(name='new character', text='a new npc enters the world', hitPoints=0) {
+    this.objectID = ""
+    this.name = name
+    this.text = text
+    this.hitPoints = hitPoints
+}
+
+export { locationLabel, Location}
+
+const locationLabel = 'LOC'
+
+function Location(name='new location', text='a new npc enters the world') {
+    this.objectID = ""
     this.name = name
     this.text = text
 }

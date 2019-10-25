@@ -251,6 +251,9 @@
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
                                     vueComponent.$store.commit('showModal')
                                 }
+                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
+                                    vueComponent.$store.commit('showModal')
+                                }
                             })
 
 

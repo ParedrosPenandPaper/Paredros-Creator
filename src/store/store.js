@@ -12,7 +12,11 @@ export const store = new Vuex.Store({
 
             ]
         },
-        showModal: false
+        modal: {
+            show: false,
+            type: null,
+            confirmed: false
+        }
     },
     mutations: {
         setAdventureObject(state, response) {
@@ -69,11 +73,25 @@ export const store = new Vuex.Store({
             alreadyAddedMapping.collapsed = false
         },
         showModal(state){
-            state.showModal = true
+            state.modal.show = true
+            state.modal.type = state.currentDragSelection
             state.adventureObject = [...state.adventureObject]
         },
-        hideModal(state){
-            state.showModal = false
+        closeModal(state, confirm){
+            state.modal.show = false
+            state.modal.type = null
+            state.modal.confirmed = confirm
+            state.adventureObject = [...state.adventureObject]
+        },
+        addPlayerCharacter(state, nonPlayerCharacter) {
+            if (state.adventureObject.length > 2) {
+                state.adventureObject[2].push(nonPlayerCharacter)
+            }
+            else
+            {
+                state.adventureObject.push([nonPlayerCharacter])
+            }
+            state.modal.confirmed = false
             state.adventureObject = [...state.adventureObject]
         }
     },
