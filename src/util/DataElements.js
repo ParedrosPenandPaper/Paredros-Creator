@@ -1,3 +1,5 @@
+var ObjectID = require("bson-objectid")
+
 export {blankAdventure}
 
 function blankAdventure(title='newAdventure', author='anonymous') {
@@ -37,7 +39,7 @@ export { characterLabel, Character}
 const characterLabel = 'NPC'
 
 function Character(name='new character', text='a new npc enters the world', hitPoints=0) {
-    this.objectID = ""
+    this.objectID = ObjectID().toHexString()
     this.name = name
     this.text = text
     this.hitPoints = hitPoints
@@ -48,7 +50,7 @@ export { locationLabel, Location}
 const locationLabel = 'LOC'
 
 function Location(name='new location', text='this is a strange site') {
-    this.objectID = ""
+    this.objectID = ObjectID().toHexString()
     this.name = name
     this.text = text
 }

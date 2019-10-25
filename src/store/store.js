@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as dataElements from '../util/DataElements.js'
 
 Vue.use(Vuex)
 
@@ -85,31 +86,24 @@ export const store = new Vuex.Store({
             }
             state.adventureObject = [...state.adventureObject]
         },
-        // TODO: Refactor duplikate
-        addPlayerCharacter(state, nonPlayerCharacter) {
-            if (state.adventureObject.length > 2) {
-                state.adventureObject[2].push(nonPlayerCharacter)
+        addContent(state, content) {
+            if (state.adventureObject.length < 3) {
+                let emptyContentObject = {
+                    character: [],
+                    location: []
+                }
+                state.adventureObject.push(emptyContentObject)
             }
-            else
-            {
-                state.adventureObject.push([nonPlayerCharacter])
+            if (content instanceof dataElements.Character) {
+                state.adventureObject[2].character.push(content)
+            }
+            else if (content instanceof dataElements.Location) {
+                state.adventureObject[2].location.push(content)
             }
             state.modal.confirmed = false
             state.modal.type = null
             state.adventureObject = [...state.adventureObject]
         },
-        addLocation(state, location) {
-            if (state.adventureObject.length > 2) {
-                state.adventureObject[2].push(location)
-            }
-            else
-            {
-                state.adventureObject.push([location])
-            }
-            state.modal.confirmed = false
-            state.modal.type = null
-            state.adventureObject = [...state.adventureObject]
-        }
     },
     actions: {
 

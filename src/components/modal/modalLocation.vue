@@ -26,7 +26,7 @@
         methods: {
             addNewLocation() {
                 let location = new dataElements.Location(this.locationName, this.locationDescription)
-                this.$store.commit("addLocation", location)
+                this.$store.commit("addContent", location)
                 this.resetInputs()
             },
             resetInputs() {

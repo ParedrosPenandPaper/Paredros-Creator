@@ -2,8 +2,8 @@
     <div id="app">
         <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
         <tree id="tree"></tree>
-        <editor></editor>
-        <modal class="modal-container" v-show="this.$store.state.modal.show"></modal>
+        <editor id="editor"></editor>
+        <modal id="modal-container" v-show="this.$store.state.modal.show"></modal>
     </div>
 </template>
 
@@ -69,17 +69,10 @@
 
     #editor{
         grid-area: editor;
-        border: 1px solid black;
-        padding: 5px;
+        background-color: #c4c4c4;
     }
 
-    .modal-container {
-        position: absolute;
-        top: 100px;
-        left: 200px;
-        padding: 60px;
-        z-index: 100;
-        background-color: lightgrey;
-        border: solid 2px dimgrey;
+    #modal-container {
+
     }
 </style>
