@@ -241,6 +241,7 @@
                                     .style('fill', 'steelblue')
                             })
                             .on('drop', function () {
+                                // TODO: Da es jetzt die Selection im store gibt die chapter/scene events bei zeiten refactoren
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Chapter) {
                                     vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
                                     vueComponent.renderTree()
@@ -251,9 +252,11 @@
                                 // TODO: wahrscheinlich selection Mitgeben um Referenz in den Content abzulegen
                                 // TODO: diese Events sind für scenes und chapter gleich => ggf auslagern
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                    vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
                                     vueComponent.$store.commit('showModal')
                                 }
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
+                                    vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
                                     vueComponent.$store.commit('showModal')
                                 }
                             })
@@ -286,9 +289,11 @@
                                 vueComponent.renderTree()
                             }
                             if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
                                 vueComponent.$store.commit('showModal')
                             }
                             if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
+                                vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
                                 vueComponent.$store.commit('showModal')
                             }
                         })

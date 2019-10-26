@@ -8,6 +8,10 @@ export const store = new Vuex.Store({
     state: {
         adventureObject: {},
         currentDragSelection: {},
+        currentDropTarget: {
+            value: null,
+            type: null
+        },
         guiState: {
             collapsedLinks:[
 
@@ -57,6 +61,18 @@ export const store = new Vuex.Store({
         resetDragSelection(state) {
             state.currentDragSelection = null
         },
+        setDropTarget(state, target) {
+            if (target.data) {
+                state.currentDropTarget.value = target.data
+                state.currentDropTarget.type = new dataElements.Chapter
+            }
+            // Wenn kein Target.data, dann muss es scene sein
+            else {
+                let index = target.index
+                state.currentDropTarget.type = new dataElements.Scene
+                state.currentDropTarget.value = target.path[index]
+            }
+        },
         setCollapsedLinks(state, mapping){
             let collapsedLinks = state.guiState.collapsedLinks
             let alreadyAddedMapping = collapsedLinks.find(element => element.parent.data === mapping.parent.data && element.child.data === mapping.child.data)
@@ -83,6 +99,8 @@ export const store = new Vuex.Store({
             state.modal.confirmed = confirm
             if (!confirm) {
                 state.modal.type = null
+                state.currentDropTarget.value = null
+                state.currentDropTarget.type = null
             }
             state.adventureObject = [...state.adventureObject]
         },
@@ -100,8 +118,15 @@ export const store = new Vuex.Store({
             else if (content instanceof dataElements.Location) {
                 state.adventureObject[2].location.push(content)
             }
+            // überprüfen ob Content Array vorhanden ist, falls nicht neues erzeugen
+            if (state.currentDropTarget.type instanceof dataElements.Scene && !state.currentDropTarget.value.content) {
+                    state.currentDropTarget.value.content = []
+            }
+            state.currentDropTarget.value.content.push(content.objectID)
             state.modal.confirmed = false
             state.modal.type = null
+            state.currentDropTarget.value = null
+            state.currentDropTarget.type = null
             state.adventureObject = [...state.adventureObject]
         },
     },
