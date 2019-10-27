@@ -2,7 +2,8 @@
     <div id="app">
         <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
         <tree id="tree"></tree>
-        <editor></editor>
+        <editor id="editor"></editor>
+        <modal id="modal-container" v-show="this.$store.state.modal.show"></modal>
     </div>
 </template>
 
@@ -11,6 +12,7 @@
     import Editor from './components/editor/Editor.vue'
     import Menuebar from './components/menuebar/Menuebar.vue'
     import Tree from './components/tree/Tree.vue'
+    import Modal from './components/modal/modalContainer.vue'
 
     //import localDataOne from '../data/example1.json'
     //import localDataTwo from '../data/example2.json'
@@ -19,12 +21,15 @@
     export default {
         name: 'app',
         data: function() {
-            return {}
+            return {
+                value: false
+            }
         },
         components: {
             Editor,
             Menuebar,
-            Tree
+            Tree,
+            Modal
         },
         methods: {
             getTestAdventure(){
@@ -64,7 +69,10 @@
 
     #editor{
         grid-area: editor;
-        border: 1px solid black;
-        padding: 5px;
+        background-color: #c4c4c4;
+    }
+
+    #modal-container {
+
     }
 </style>

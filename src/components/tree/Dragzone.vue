@@ -21,6 +21,14 @@
                 {
                     label: dataElements.sceneLabel,
                     constructor: dataElements.Scene
+                },
+                {
+                    label: dataElements.characterLabel,
+                    constructor: dataElements.Character
+                },
+                {
+                    label: dataElements.locationLabel,
+                    constructor: dataElements.Location
                 }]
             }
         },

@@ -218,6 +218,14 @@
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
                         })
+                        .on('contextmenu', function () {
+                            d3.event.preventDefault()
+                            alert('do you really want to delete this shit?')
+                        })
+                        // TODO: Click to delete function
+                        .on('click', function () {
+                            vueComponent.$store.commit('deleteChapter', d3.select(this).datum())
+                        })
 
 
                     // drag events chapter
@@ -233,12 +241,23 @@
                                     .style('fill', 'steelblue')
                             })
                             .on('drop', function () {
+                                // TODO: Da es jetzt die Selection im store gibt die chapter/scene events bei zeiten refactoren
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Chapter) {
                                     vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
                                     vueComponent.renderTree()
                                 }
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
                                     vueComponent.$store.commit('addSceneAfterChapter', d3.select(this).datum())
+                                }
+                                // TODO: wahrscheinlich selection Mitgeben um Referenz in den Content abzulegen
+                                // TODO: diese Events sind für scenes und chapter gleich => ggf auslagern
+                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                    vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
+                                    vueComponent.$store.commit('showModal')
+                                }
+                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
+                                    vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
+                                    vueComponent.$store.commit('showModal')
                                 }
                             })
 
@@ -268,6 +287,14 @@
                             if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
                                 vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
                                 vueComponent.renderTree()
+                            }
+                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
+                                vueComponent.$store.commit('showModal')
+                            }
+                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
+                                vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
+                                vueComponent.$store.commit('showModal')
                             }
                         })
                 }
