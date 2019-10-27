@@ -1,7 +1,7 @@
 <template>
     <div class="editor-panel" :class="{ 'chapter-panel': storyItem.hasOwnProperty('children'), 'scene-panel': !storyItem.hasOwnProperty('children') }">
-        <p contenteditable="true" @focusout="testEventTitle">{{storyItem.title}}</p>
-        <p contenteditable="true" @focusout="testEventText">{{storyItem.text}}</p>
+        <p :class="{ 'chapter-title': storyItem.hasOwnProperty('children'), 'scene-title': !storyItem.hasOwnProperty('children') }" contenteditable="true" @focusout="testEventTitle">{{storyItem.title}}</p>
+        <p :class="{ 'chapter-text': storyItem.hasOwnProperty('children'), 'scene-text': !storyItem.hasOwnProperty('children') }" contenteditable="true" @focusout="testEventText">{{storyItem.text}}</p>
     </div>
 </template>
 
@@ -28,14 +28,30 @@
 <style scoped>
     .editor-panel{
         margin: 2em;
-        font-family: 'Baskerville'
+        font-family: 'Segoe UI'
     }
 
     .chapter-panel{
         
     }
 
+    .chapter-title{
+        font-size: 1.2em
+    }
+
+    .chapter-text{
+        font-size: 1.2em
+    }
+
     .scene-panel{
         margin-left: 5em;
+    }
+
+    .scene-title{
+        font-size: 1.2em
+    }
+
+    .scene-text{
+        font-size: 1.2em
     }
 </style>
