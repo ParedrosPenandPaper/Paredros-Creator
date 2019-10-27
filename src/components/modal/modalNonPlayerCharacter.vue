@@ -32,7 +32,6 @@
                 let nonPlayerCharacter = new dataElements.Character(this.characterName, this.characterDescription,
                     this.characterHitPoints)
                 this.$store.commit("addContent", nonPlayerCharacter)
-                this.resetInputs()
             },
             resetInputs() {
                 this.characterName = ""
@@ -46,6 +45,7 @@
                     && this.$store.state.modal.type instanceof dataElements.Character) {
                     this.addNewNonPlayerCharacter()
                 }
+                this.resetInputs()
             })
         },
 

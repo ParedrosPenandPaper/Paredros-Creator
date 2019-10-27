@@ -27,7 +27,6 @@
             addNewLocation() {
                 let location = new dataElements.Location(this.locationName, this.locationDescription)
                 this.$store.commit("addContent", location)
-                this.resetInputs()
             },
             resetInputs() {
                 this.locationName = ""
@@ -40,6 +39,7 @@
                     && this.$store.state.modal.type instanceof dataElements.Location) {
                     this.addNewLocation()
                 }
+                this.resetInputs()
             })
         },
     }
