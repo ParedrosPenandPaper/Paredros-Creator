@@ -2,7 +2,7 @@
     <div id="app">
         <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
         <tree id="tree"></tree>
-        <editor id="editor"></editor>
+        <editor></editor>
         <modal id="modal-container" v-show="this.$store.state.modal.show"></modal>
     </div>
 </template>
@@ -68,8 +68,7 @@
     }
 
     #editor{
-        grid-area: editor;
-        background-color: #c4c4c4;
+
     }
 
     #modal-container {
