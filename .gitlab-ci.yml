@@ -1,45 +1,27 @@
-image: nginx:latest
-
 stages:
-  - build-image
-  - deploy
+  - test
+  - vue-build
+  - docker-build
   
-build-staging:
-  stage: build-image
-  script:
-  - docker build --rm -t paredros-creator-server-nodb -f Dockerfile_staging .
-  - docker images -a
-  only:
-  - master
+test:
+  stage: test
+  script: node test/test.js
   tags:
-  - deploy
+    - deploy
+  
+vue-build:
+  stage: vue-build
+  artifacts:
+    paths:
+      - dist
+  script:
+    - npm install --progress=false
+    - npm run build
+  tags:
+    - deploy
 
-build-prod:
-  stage: build-image
-  script:
-  - docker build --rm -t paredros-creator-server-nodb -f Dockerfile_prod .
-  - docker images -a
-  only:
-  - release
+docker-build:
+  stage: docker-build
+  script: docker build -t paredros-creator .
   tags:
-  - deploy
-
-deploy-staging:
-  stage: deploy
-  script:
-  - docker stop paredros-creator-server-staging
-  - docker run --name paredros-creator-server-staging --network paredros-net --rm -d -p 1337:80 paredros-creator-server-nodb
-  only:
-  - master
-  tags:
-  - deploy
-
-deploy-prod:
-  stage: deploy
-  script:
-  - docker stop paredros-creator-server-prod
-  - docker run --name paredros-creator-server-prod --network paredros-net --rm -d -p 80:80 paredros-creator-server-nodb
-  only:
-  - release
-  tags:
-  - deploy
+    - deploy
