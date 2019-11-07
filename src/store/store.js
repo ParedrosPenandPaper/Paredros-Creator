@@ -21,7 +21,9 @@ export const store = new Vuex.Store({
             show: false,
             type: null,
             confirmed: false
-        }
+        },
+        // TODO: Highly suspecious
+        foundContent : []
     },
     mutations: {
         setAdventureObject(state, response) {
@@ -129,6 +131,30 @@ export const store = new Vuex.Store({
             state.currentDropTarget.type = null
             state.adventureObject = [...state.adventureObject]
         },
+        // TODO: REFACTOR
+        findContent(state, keyArray) {
+            if (state.adventureObject[2]) {
+                if (state.adventureObject[2].character) {
+                    for (let i = 0; i < keyArray.length; i++) {
+                        let foundCharacter = state.adventureObject[2].character.find(x => x.objectID === keyArray[i])
+                        if (foundCharacter) {
+                            state.foundContent.push(foundCharacter)
+                        }
+                    }
+                }
+                if (state.adventureObject[2].location) {
+                    for (let i = 0; i < keyArray.length; i++) {
+                        let foundLocation = state.adventureObject[2].location.find(x => x.objectID === keyArray[i])
+                        if (foundLocation) {
+                            state.foundContent.push(foundLocation)
+                        }
+                    }
+                }
+            }
+        },
+        resetFoundContent(state) {
+            state.foundContent = []
+        }
     },
     actions: {
 
