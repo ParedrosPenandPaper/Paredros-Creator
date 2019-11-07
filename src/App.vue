@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <menuebar id="menuebar" @get-test-adventure="getTestAdventure"></menuebar>
+        <menuebar id="menuebar"></menuebar>
         <tree id="tree"></tree>
         <editor></editor>
         <modal id="modal-container" v-show="this.$store.state.modal.show"></modal>
@@ -32,10 +32,7 @@
             Modal
         },
         methods: {
-            getTestAdventure(){
-                axios.get('http://it-projekt19-6.informatik.fh-nuernberg.de/getTestAdventure')
-                    .then(response => (this.$store.commit('setAdventureObject', response)))
-            }
+            
         },
         mounted() {
             this.$store.commit('setAdventureObject', localDataThree)
