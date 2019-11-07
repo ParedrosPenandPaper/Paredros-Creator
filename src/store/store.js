@@ -22,8 +22,13 @@ export const store = new Vuex.Store({
             type: null,
             confirmed: false
         },
-        // TODO: Highly suspecious
-        foundContent : []
+        foundContent : {
+            npc: [],
+            location: []
+        },
+        content: {
+            show: false
+        }
     },
     mutations: {
         setAdventureObject(state, response) {
@@ -138,7 +143,7 @@ export const store = new Vuex.Store({
                     for (let i = 0; i < keyArray.length; i++) {
                         let foundCharacter = state.adventureObject[2].character.find(x => x.objectID === keyArray[i])
                         if (foundCharacter) {
-                            state.foundContent.push(foundCharacter)
+                            state.foundContent.npc.push(foundCharacter)
                         }
                     }
                 }
@@ -146,14 +151,24 @@ export const store = new Vuex.Store({
                     for (let i = 0; i < keyArray.length; i++) {
                         let foundLocation = state.adventureObject[2].location.find(x => x.objectID === keyArray[i])
                         if (foundLocation) {
-                            state.foundContent.push(foundLocation)
+                            state.foundContent.location.push(foundLocation)
                         }
                     }
                 }
             }
         },
         resetFoundContent(state) {
-            state.foundContent = []
+            state.foundContent.npc = []
+            state.foundContent.location = []
+        },
+        showContent(state) {
+            if(state.foundContent.npc.length > 0 || state.foundContent.location.length > 0) {
+                state.content.show = true;
+            }
+
+        },
+        hideContent(state) {
+            state.content.show = false;
         }
     },
     actions: {
