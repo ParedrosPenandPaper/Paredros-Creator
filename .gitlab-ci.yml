@@ -19,9 +19,13 @@ vue-build:
     - npm run build
   tags:
     - deploy
+  only:
+    - master
 
 docker-build:
   stage: docker-build
   script: docker build -t paredros-creator .
   tags:
     - deploy
+  only:
+    - master

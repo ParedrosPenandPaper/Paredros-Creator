@@ -27,7 +27,8 @@ export const store = new Vuex.Store({
             location: []
         },
         content: {
-            show: false
+            show: false,
+            current: null
         }
     },
     mutations: {
@@ -73,7 +74,6 @@ export const store = new Vuex.Store({
                 state.currentDropTarget.value = target.data
                 state.currentDropTarget.type = new dataElements.Chapter
             }
-            // Wenn kein Target.data, dann muss es scene sein
             else {
                 let index = target.index
                 state.currentDropTarget.type = new dataElements.Scene
@@ -138,7 +138,7 @@ export const store = new Vuex.Store({
         },
         // TODO: REFACTOR
         findContent(state, keyArray) {
-            if (state.adventureObject[2]) {
+            if (state.adventureObject[2] && !state.content.show) {
                 if (state.adventureObject[2].character) {
                     for (let i = 0; i < keyArray.length; i++) {
                         let foundCharacter = state.adventureObject[2].character.find(x => x.objectID === keyArray[i])
@@ -162,13 +162,29 @@ export const store = new Vuex.Store({
             state.foundContent.location = []
         },
         showContent(state) {
-            if(state.foundContent.npc.length > 0 || state.foundContent.location.length > 0) {
+            if(!state.content.show && (state.foundContent.npc.length > 0 || state.foundContent.location.length > 0)) {
                 state.content.show = true;
             }
-
         },
         hideContent(state) {
             state.content.show = false;
+        },
+        editContent(state, content) {
+            state.content.current = content;
+        },
+        updateContent(state, content) {
+            let foundIndexNPC = state.adventureObject[2].character.findIndex(x => x.objectID === state.content.current.objectID)
+            if (foundIndexNPC !== -1) {
+                state.adventureObject[2].character[foundIndexNPC].name = content.name
+                state.adventureObject[2].character[foundIndexNPC].text = content.text
+                state.adventureObject[2].character[foundIndexNPC].hitPoints = content.hitPoints
+            }
+            let foundIndexLocation = state.adventureObject[2].location.findIndex(x => x.objectID === state.content.current.objectID)
+            if (foundIndexLocation !== -1) {
+                state.adventureObject[2].location[foundIndexLocation].name = content.name
+                state.adventureObject[2].location[foundIndexLocation].text = content.text
+            }
+            state.content.current = null
         }
     },
     actions: {

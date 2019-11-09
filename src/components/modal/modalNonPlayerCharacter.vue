@@ -2,13 +2,13 @@
     <div>
         <form @submit.prevent>
             <p>Add a new non-player character</p>
-            <label for="name">Name</label>
+            <label for="name">Name: </label>
             <input v-model="characterName" type="text" id="name">
             <br><br>
-            <label for="description">Description</label>
+            <label for="description">Description: </label>
             <input v-model="characterDescription" type="text" id="description">
             <br><br>
-            <label for="hitpoints">Hitpoints</label>
+            <label for="hitpoints">Hitpoints: </label>
             <input v-model="characterHitPoints" type="text" id="hitpoints">
             <br><br>
         </form>

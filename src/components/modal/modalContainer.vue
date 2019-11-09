@@ -7,6 +7,9 @@
             <div v-show="this.$store.state.modal.type instanceof locationType">
                 <modal-location></modal-location>
             </div>
+            <div v-show="this.$store.state.content.current">
+                <modal-edit-content></modal-edit-content>
+            </div>
             <input type="submit" @click="declineModal()" value="Cancel">
             <input type="submit" @click="confirmModal()" value="Confirm">
         </div>
@@ -16,6 +19,7 @@
 <script>
     import modalNonPlayerCharacter from './modalNonPlayerCharacter.vue'
     import modalLocation from './modalLocation.vue'
+    import modalEditContent from "./modalEditContent.vue";
 
     import * as dataElements from "../../util/DataElements";
 
@@ -29,7 +33,8 @@
         },
         components: {
             modalNonPlayerCharacter,
-            modalLocation
+            modalLocation,
+            modalEditContent
         },
         methods: {
             confirmModal() {

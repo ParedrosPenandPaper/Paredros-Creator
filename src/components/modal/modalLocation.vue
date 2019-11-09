@@ -2,10 +2,10 @@
     <div>
         <form @submit.prevent>
             <p>Add a new location</p>
-            <label for="name">Name</label>
+            <label for="name">Name: </label>
             <input v-model="locationName" type="text" id="name">
             <br><br>
-            <label for="description">Description</label>
+            <label for="description">Description: </label>
             <input v-model="locationDescription" type="text" id="description">
             <br><br>
         </form>

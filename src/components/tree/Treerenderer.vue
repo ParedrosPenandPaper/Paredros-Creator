@@ -217,8 +217,6 @@
                         })
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
-                            vueComponent.$store.commit('hideContent')
-                            vueComponent.$store.commit('resetFoundContent')
                         })
                         .on('contextmenu', function () {
                             d3.event.preventDefault()
@@ -283,8 +281,6 @@
                         })
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
-                            vueComponent.$store.commit('hideContent')
-                            vueComponent.$store.commit('resetFoundContent')
                         })
 
                     // drag events scenes
