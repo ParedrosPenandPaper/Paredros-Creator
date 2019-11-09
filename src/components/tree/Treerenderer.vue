@@ -187,7 +187,7 @@
                 }
 
                 function positionTree(){
-                    d3.select('svg g.tree').attr('transform', `translate(0,${1.1*chapterRadius})`)
+                    d3.select('svg g.tree').attr('transform', `translate(0,${1.6*chapterRadius})`)
                 }
 
                 function addEventHandlers(){
