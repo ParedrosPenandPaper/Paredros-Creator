@@ -2,14 +2,13 @@
     <div id="app">
         <menuebar id="menuebar"></menuebar>
         <tree id="tree"></tree>
-        <editor></editor>
+        <editor id="editor"></editor>
         <modal id="modal-container" v-show="this.$store.state.modal.show"></modal>
         <content-view id="content-view" v-show="this.$store.state.content.show"></content-view>
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
     import Editor from './components/editor/Editor.vue'
     import Menuebar from './components/menuebar/Menuebar.vue'
     import Tree from './components/tree/Tree.vue'
@@ -50,13 +49,13 @@
         width: 100%;
         height: 100%;
         display: grid;
-        grid-template-columns: 33% 67%;
+        grid-template-columns: 40% 60%;
         grid-template-rows: 10% 90%;
         grid-template-areas:
                 "menue menue"
                 "tree editor";
 
-        font-family: Avenir;
+        background-image: radial-gradient(#fff,#d8d8d8);
     }
 
     #menuebar{
@@ -68,7 +67,7 @@
     }
 
     #editor{
-
+        grid-area: editor;
     }
 
     #modal-container {

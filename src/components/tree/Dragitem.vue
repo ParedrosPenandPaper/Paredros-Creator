@@ -34,8 +34,12 @@
         justify-content: center;
 
         cursor: move;
-        border: 2px solid steelblue;
-        border-radius: 25px;
+        border: 2px solid #91b6d4;
+        border-radius: 50%;
+        box-shadow: -4px 4px 3px #bfbfbf;
+
+        font-family: var(--font);
+        background-color: lightgrey;
     }
 
     .label-container{

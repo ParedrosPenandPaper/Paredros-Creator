@@ -1,5 +1,5 @@
 <template>
-    <div id="editor-container">
+    <div class="editor-container">
         <editor-panel v-for="(item, index) in storyItems" :key="index" :storyItem="item">
 
         </editor-panel>
@@ -49,8 +49,8 @@
 </script>
 
 <style scoped>
-    #editor-container {
-        background-color: #c4c4c4;
+    .editor-container {
         overflow-y: scroll;
+        padding-right: 8em;
     }
 </style>

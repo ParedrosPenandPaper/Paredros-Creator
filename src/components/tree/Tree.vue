@@ -23,5 +23,6 @@
         flex-flow: row nowrap;
         justify-content: stretch;
         align-items: center;
+        padding-left: 1em;
     }
 </style>

@@ -1,11 +1,12 @@
 <template>
     <div class="menuebar-container">
-        <button class="new" @click="createNewAdventure">new</button>
-        <button class="load" @click="loadAdventure">load</button>
-        <button class="save" @click="saveAdventure">save</button>
-        <button class="import" @click="importAdventure">import</button>
+        <button class="menu-button">home</button>
+        <button class="menu-button" @click="createNewAdventure">new</button>
+        <button class="menu-button" @click="loadAdventure">load</button>
+        <button class="menu-button" @click="saveAdventure">save</button>
+        <button class="menu-button" @click="importAdventure">import</button>
         <input id="fileUpload" type="file" @change="handleUpload"/>
-        <button class="export" @click="exportAdventure">export</button>
+        <button class="menu-button" @click="exportAdventure">export</button>
     </div>
 </template>
 
@@ -59,33 +60,34 @@
 </script>
 
 <style scoped>
-.menuebar-container{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: stretch;
-    align-items: center;
-}
+    .menuebar-container{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        font-family: var(--font);
+    }
 
-button{
-    height: 100%;
-    flex-grow: 1;
+    .menu-button {
+        width: 8%;
+        height: 50%;
 
-    border-style: none;
-    outline-style: none;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1.5em;
-    background-color: steelblue;
-}
+        outline-style: none;
+        border-radius: 0.6em;
+        border: 2px solid #d9d9d9;
+        background-color: #f2f2f2;
+        font-size: 1.3em;
+        cursor: pointer;
 
-button:hover{
-    background-color: #7eaacd;
-}
+        font-family: var(--font);
+    }
 
-button:active{
-    background-color: #396a93;
-}
+    .menu-button:hover{
+        background-image: radial-gradient(#c8daea, #6c9dc6);
+        border-color: #6c9dc6;
+    }
 
-#fileUpload{
-    display: none;
-}
+    #fileUpload{
+        display: none;
+    }
 </style>

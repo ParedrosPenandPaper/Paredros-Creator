@@ -187,7 +187,7 @@
                 }
 
                 function positionTree(){
-                    d3.select('svg g.tree').attr('transform', `translate(0,${2*chapterRadius})`)
+                    d3.select('svg g.tree').attr('transform', `translate(0,${1.1*chapterRadius})`)
                 }
 
                 function addEventHandlers(){
@@ -232,13 +232,11 @@
                     d3.selectAll('svg g.chapters circle')
                             .on('dragenter', function () {
                                 d3.select(this)
-                                    .attr('r', 25)
-                                    .style("fill", "red")
+                                    .attr('r', chapterRadius*1.5)
                             })
                             .on('dragleave', function () {
                                 d3.select(this)
                                     .attr('r', chapterRadius)
-                                    .style('fill', 'steelblue')
                             })
                             .on('drop', function () {
                                 // TODO: Da es jetzt die Selection im store gibt die chapter/scene events bei zeiten refactoren
@@ -285,6 +283,14 @@
 
                     // drag events scenes
                     d3.selectAll('svg g.scenes circle')
+                        .on('dragenter', function () {
+                            d3.select(this)
+                                .attr('r', sceneRadius*1.5)
+                        })
+                        .on('dragleave', function () {
+                            d3.select(this)
+                                .attr('r', sceneRadius)
+                        })
                         .on('drop', function () {
                             if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
                                 vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
@@ -358,12 +364,13 @@
     .tree-renderer-container{
         width: 100%;
         height: 100%;
+        padding-top: 2em;
     }
 
     .canvas{
     }
     .chapters {
-        fill: steelblue;
+        fill: #6c9dc6;
         stroke: black;
     }
 
@@ -383,7 +390,6 @@
 
     .labels {
         background-color: white;
-        font-family: 'Segoe UI';
     }
 
 </style>

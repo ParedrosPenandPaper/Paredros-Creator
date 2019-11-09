@@ -42,13 +42,10 @@
     .drag-zone-container{
         height: 100%;
         width: 70px;
-        background-color: #c4c4c4;
 
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-evenly;
         align-items: center;
-
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 </style>
