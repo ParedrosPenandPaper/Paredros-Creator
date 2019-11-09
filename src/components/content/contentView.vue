@@ -1,6 +1,6 @@
 <template>
     <div class="contentView">
-        <div v-show="this.$store.state.foundContent.npc.length > 0">
+        <div v-show="this.$store.state.foundContent.npc.length > 0 && this.$store.state.content.show">
             <p>NPC:</p>
             <ul>
                 <li v-for="item in this.$store.state.foundContent.npc" :key="item.index" :contenteditable="true">
@@ -10,7 +10,7 @@
                 </li>
             </ul>
         </div>
-        <div v-show="this.$store.state.foundContent.location.length > 0">
+        <div v-show="this.$store.state.foundContent.location.length > 0 && this.$store.state.content.show">
             <p>Location:</p>
             <ul>
                 <li v-for="item in this.$store.state.foundContent.location" :key="item.index" :contenteditable="true">
