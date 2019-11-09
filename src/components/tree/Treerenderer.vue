@@ -50,7 +50,7 @@
                 // das Datenformat doch trennen wegen render reasons bzw funktionen schreiben die Teile extrahieren
                 var root = d3.hierarchy(this.adventure)
                 var treeLayout = d3.tree()
-                treeLayout.size([svgWidth, svgHeight - 4*chapterRadius])
+                treeLayout.size([svgWidth, svgHeight - 4*chapterRadius - 32]) // 2em abziehen damit der Knödel nicht drüberhängt
                 treeLayout(root)
 
                 scaleTreeHeight(root.descendants(), treeScaleFactor)
