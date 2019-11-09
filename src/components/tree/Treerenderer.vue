@@ -202,10 +202,9 @@
                     d3.selectAll('svg g.chapters circle')
                         .on('mouseenter', function () {
                             let chapter = d3.select(this)
-                            // Der gefundene Content, muss noch verarbeitet werden
                             vueComponent.$store.commit('findContent', chapter.datum().data.content)
-                            // eslint-disable-next-line no-console
-                            console.log(vueComponent.$store.state.foundContent)
+                            vueComponent.$store.commit('showContent')
+
 
                             tmp = d3.select('svg g.labels')
                                 .append('text')
@@ -218,7 +217,6 @@
                         })
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
-                            vueComponent.$store.commit('resetFoundContent')
                         })
                         .on('contextmenu', function () {
                             d3.event.preventDefault()
@@ -269,6 +267,8 @@
                         .on('mouseenter', function () {
                             let sceneNode = d3.select(this)
                             let data = sceneNode.data()[0]
+                            vueComponent.$store.commit('findContent', data.path[data.index].content)
+                            vueComponent.$store.commit('showContent')
 
                             tmp = d3.select('svg g.labels')
                                 .append('text')

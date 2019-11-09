@@ -17,7 +17,6 @@
         methods: {
             createNewAdventure() {
                 this.$store.state.adventureObject = dataElements.blankAdventure()
-                // TODO: Update rendertree nach änderung
             },
             loadAdventure() {
                 alert("Not implemented yet")
@@ -30,7 +29,7 @@
                 clickEvent.preventDefault()
             },
             handleUpload(changeEvent) {
-                const uploadedFile = changeEvent.srcElement.files[0]
+                const uploadedFile = changeEvent.target.files[0]
 
                 // eslint-disable-next-line
                 console.log(uploadedFile)

@@ -22,8 +22,14 @@ export const store = new Vuex.Store({
             type: null,
             confirmed: false
         },
-        // TODO: Highly suspecious
-        foundContent : []
+        foundContent : {
+            npc: [],
+            location: []
+        },
+        content: {
+            show: false,
+            current: null
+        }
     },
     mutations: {
         setAdventureObject(state, response) {
@@ -68,7 +74,6 @@ export const store = new Vuex.Store({
                 state.currentDropTarget.value = target.data
                 state.currentDropTarget.type = new dataElements.Chapter
             }
-            // Wenn kein Target.data, dann muss es scene sein
             else {
                 let index = target.index
                 state.currentDropTarget.type = new dataElements.Scene
@@ -133,12 +138,12 @@ export const store = new Vuex.Store({
         },
         // TODO: REFACTOR
         findContent(state, keyArray) {
-            if (state.adventureObject[2]) {
+            if (state.adventureObject[2] && !state.content.show) {
                 if (state.adventureObject[2].character) {
                     for (let i = 0; i < keyArray.length; i++) {
                         let foundCharacter = state.adventureObject[2].character.find(x => x.objectID === keyArray[i])
                         if (foundCharacter) {
-                            state.foundContent.push(foundCharacter)
+                            state.foundContent.npc.push(foundCharacter)
                         }
                     }
                 }
@@ -146,14 +151,40 @@ export const store = new Vuex.Store({
                     for (let i = 0; i < keyArray.length; i++) {
                         let foundLocation = state.adventureObject[2].location.find(x => x.objectID === keyArray[i])
                         if (foundLocation) {
-                            state.foundContent.push(foundLocation)
+                            state.foundContent.location.push(foundLocation)
                         }
                     }
                 }
             }
         },
         resetFoundContent(state) {
-            state.foundContent = []
+            state.foundContent.npc = []
+            state.foundContent.location = []
+        },
+        showContent(state) {
+            if(!state.content.show && (state.foundContent.npc.length > 0 || state.foundContent.location.length > 0)) {
+                state.content.show = true;
+            }
+        },
+        hideContent(state) {
+            state.content.show = false;
+        },
+        editContent(state, content) {
+            state.content.current = content;
+        },
+        updateContent(state, content) {
+            let foundIndexNPC = state.adventureObject[2].character.findIndex(x => x.objectID === state.content.current.objectID)
+            if (foundIndexNPC !== -1) {
+                state.adventureObject[2].character[foundIndexNPC].name = content.name
+                state.adventureObject[2].character[foundIndexNPC].text = content.text
+                state.adventureObject[2].character[foundIndexNPC].hitPoints = content.hitPoints
+            }
+            let foundIndexLocation = state.adventureObject[2].location.findIndex(x => x.objectID === state.content.current.objectID)
+            if (foundIndexLocation !== -1) {
+                state.adventureObject[2].location[foundIndexLocation].name = content.name
+                state.adventureObject[2].location[foundIndexLocation].text = content.text
+            }
+            state.content.current = null
         }
     },
     actions: {
