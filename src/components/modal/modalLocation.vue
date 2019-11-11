@@ -1,13 +1,18 @@
 <template>
     <div>
-        <form @submit.prevent>
-            <p>Add a new location</p>
-            <label for="name">Name: </label>
-            <input v-model="locationName" type="text" id="name">
-            <br><br>
-            <label for="description">Description: </label>
-            <input v-model="locationDescription" type="text" id="description">
-            <br><br>
+        <form @submit.prevent class="form-container">
+            <p>Create new location</p>
+            <div class="input-container">
+                <label for="name">Name: </label>
+                <input class="name-input" v-model="locationName" type="text" id="name" autofocus>
+            </div>
+            <div class="input-container">
+                <label for="description">Description: </label>
+                <textarea class="description-input" v-model="locationDescription" type="text" id="description"
+                          rows="4" cols="35" wrap="hard">
+                </textarea>
+            </div>
+
         </form>
     </div>
 </template>
@@ -46,5 +51,35 @@
 </script>
 
 <style scoped>
+    .form-container {
+        font-family: var(--font);
+    }
 
+    .input-container {
+        margin: 0.4em;
+        padding: 0.2em;
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+
+    .name-input {
+        padding: 0.4em;
+
+        border-radius: 0.5em;
+        outline: none;
+
+        font-family: var(--font);
+    }
+
+    .description-input {
+        padding: 0.4em;
+
+        border-radius: 0.5em;
+        outline: none;
+
+        font-family: var(--font);
+    }
 </style>

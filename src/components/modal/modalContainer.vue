@@ -1,17 +1,19 @@
 <template>
     <div class="modalMask">
-        <div class="modalContainer">
-            <div v-show="this.$store.state.modal.type instanceof nscType">
+        <div class="modal-container">
+            <div class="variable-container" v-show="this.$store.state.modal.type instanceof nscType">
                 <modal-non-player-character></modal-non-player-character>
             </div>
-            <div v-show="this.$store.state.modal.type instanceof locationType">
+            <div class="variable-container" v-show="this.$store.state.modal.type instanceof locationType">
                 <modal-location></modal-location>
             </div>
-            <div v-show="this.$store.state.content.current">
+            <div class="variable-container" v-show="this.$store.state.content.current">
                 <modal-edit-content></modal-edit-content>
             </div>
-            <input type="submit" @click="declineModal()" value="Cancel">
-            <input type="submit" @click="confirmModal()" value="Confirm">
+            <div class="button-container">
+                <input class="modal-button" type="submit" @click="declineModal()" value="Cancel">
+                <input class="modal-button" type="submit" @click="confirmModal()" value="Confirm">
+            </div>
         </div>
     </div>
 </template>
@@ -48,15 +50,53 @@
 </script>
 
 <style scoped>
-    .modalContainer {
+    .modal-container {
         position: absolute;
         top: 200px;
         left: 350px;
-        padding: 60px;
+        padding: 10px;
         z-index: 100;
-        background-color: lightgrey;
+        background-image: radial-gradient(#fff,#d8d8d8);
         border: solid 2px dimgrey;
-        border-radius: 10px;
+        border-radius: 1em;
+    }
+
+    .button-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+        align-items: flex-end;
+    }
+
+    .modal-button {
+        width: 5em;
+        height: 2em;
+        margin: 0.2em;
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+
+        outline-style: none;
+        border-radius: 0.4em 0.4em 0.4em 0.4em;
+        border: 2px solid #d9d9d9;
+        background-color: #f2f2f2;
+        font-size: 1.3em;
+        cursor: pointer;
+
+        font-family: var(--font);
+    }
+
+    .modal-button:hover{
+        border-color: #6c9dc6;
+    }
+
+    .variable-container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: flex-start;
+        align-items: center;
     }
 
     .modalMask {
