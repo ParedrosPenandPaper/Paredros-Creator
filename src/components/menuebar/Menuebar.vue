@@ -64,17 +64,24 @@
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-evenly;
-        align-items: center;
+        align-items:flex-start;
         font-family: var(--font);
     }
 
     .menu-button {
         width: 8%;
-        height: 50%;
+        height: 60%;
+        margin: 0;
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
 
         outline-style: none;
-        border-radius: 0.6em;
+        border-radius: 0 0 0.6em 0.6em;
         border: 2px solid #d9d9d9;
+        border-top: none;
         background-color: #f2f2f2;
         font-size: 1.3em;
         cursor: pointer;
@@ -83,7 +90,6 @@
     }
 
     .menu-button:hover{
-        background-image: radial-gradient(#c8daea, #6c9dc6);
         border-color: #6c9dc6;
     }
 

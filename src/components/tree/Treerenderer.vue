@@ -38,7 +38,7 @@
 
                 // length constants
                 const svgWidth = d3.select('div.tree-renderer-container').style('width').replace('px', '')
-                const svgHeight = d3.select('div.tree-renderer-container').style('height').replace('px', '')
+                const svgHeight = d3.select('div.tree-renderer-container').style('height').replace('px', '') - 3 //no clue why these -3 is neede but neccessary to fit....
                 const chapterRadius = 20
                 const sceneRadius = chapterRadius / 2
                 const treeScaleFactor = 1
@@ -187,7 +187,7 @@
                 }
 
                 function positionTree(){
-                    d3.select('svg g.tree').attr('transform', `translate(0,${1.6*chapterRadius})`)
+                    d3.select('svg g.tree').attr('transform', `translate(0,${3.0*chapterRadius})`)
                 }
 
                 function addEventHandlers(){
@@ -364,11 +364,8 @@
     .tree-renderer-container{
         width: 100%;
         height: 100%;
-        padding-top: 2em;
     }
 
-    .canvas{
-    }
     .chapters {
         fill: #6c9dc6;
         stroke: black;
