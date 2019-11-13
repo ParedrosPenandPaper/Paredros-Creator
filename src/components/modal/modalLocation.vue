@@ -3,11 +3,11 @@
         <form @submit.prevent class="form-container">
             <p>Create new location</p>
             <div class="input-container">
-                <label for="name">Name: </label>
+                <label for="name">Name</label>
                 <input class="name-input" v-model="locationName" type="text" id="name" autofocus>
             </div>
             <div class="input-container">
-                <label for="description">Description: </label>
+                <label for="description">Description</label>
                 <textarea class="description-input" v-model="locationDescription" type="text" id="description"
                           rows="4" cols="35" wrap="hard">
                 </textarea>

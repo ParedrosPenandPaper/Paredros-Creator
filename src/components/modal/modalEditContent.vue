@@ -1,22 +1,27 @@
 <template>
     <div>
-        <form @submit.prevent>
+        <form @submit.prevent class="form-container">
             <div v-for="(value, key) in this.$store.state.content.current" :key="key">
                 <div v-if="key!=='objectID'">
                     <div v-if="key==='name'">
-                        <label for="name">Name: </label>
-                        <input type="text" value="content.name" v-model="content.name" id="name">
-                        <br><br>
+                        <div class="input-container">
+                            <label for="name">Name: </label>
+                            <input class="name-input" type="text" value="content.name" v-model="content.name" id="name">
+                        </div>
                     </div>
                     <div v-if="key==='text'">
-                        <label for="description">Description: </label>
-                        <input type="text" value="content.text" v-model="content.text" id="description">
-                        <br><br>
+                        <div class="input-container">
+                            <label for="description">Description: </label>
+                            <textarea class="description-input" type="text" value="content.text"
+                                      v-model="content.text" id="description" rows="4" cols="35" wrap="hard">
+                            </textarea>
+                        </div>
                     </div>
                     <div v-if="key==='hitPoints'">
-                        <label for="hitPoints">Hitpoints: </label>
-                        <input type="text" value="content.hitPoints" v-model="content.hitPoints" id="hitPoints">
-                        <br><br>
+                        <div class="input-container">
+                            <label for="hitPoints">Hitpoints: </label>
+                            <input class="integer-input" type="text" value="content.hitPoints" v-model="content.hitPoints" id="hitPoints">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,5 +65,44 @@
 </script>
 
 <style scoped>
+    .form-container {
+        font-family: var(--font);
+    }
 
+    .input-container {
+        margin: 0.4em;
+        padding: 0.2em;
+
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+
+    .name-input {
+        padding: 0.4em;
+
+        border-radius: 0.5em;
+        outline: none;
+
+        font-family: var(--font);
+    }
+
+    .description-input {
+        padding: 0.4em;
+
+        border-radius: 0.5em;
+        outline: none;
+
+        font-family: var(--font);
+    }
+
+    .integer-input {
+        padding: 0.4em;
+
+        border-radius: 0.5em;
+        outline: none;
+
+        font-family: var(--font);
+    }
 </style>

@@ -11,8 +11,8 @@
                 <modal-edit-content></modal-edit-content>
             </div>
             <div class="button-container">
-                <input class="modal-button" type="submit" @click="declineModal()" value="Cancel">
-                <input class="modal-button" type="submit" @click="confirmModal()" value="Confirm">
+                <input class="modal-button" type="submit" @click="declineModal()" value="cancel">
+                <input class="modal-button" type="submit" @click="confirmModal()" value="confirm">
             </div>
         </div>
     </div>
