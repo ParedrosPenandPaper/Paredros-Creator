@@ -1,29 +1,29 @@
 <template>
     <div class="contentView">
         <div v-show="this.$store.state.foundContent.npc.length > 0 && this.$store.state.content.show">
-            <p>NPCs</p>
-            <ul>
-                <li class="list-item" v-for="item in this.$store.state.foundContent.npc" :key="item.index" :contenteditable="true">
+            <p class="title">NPCs</p>
+            <ul class="unordered-list">
+                <li class="list-item" v-for="item in this.$store.state.foundContent.npc" :key="item.index">
                     <div class="name-container">
                         {{ item.name }}
                     </div>
                     <div class="button-container">
-                        <button class="content-button" @click="editContent(item)">edit</button>
-                        <button class="content-button">delete</button>
+                        <button class="emoji-button" @click="editContent(item)">✏️</button>
+                        <button class="emoji-button">❌</button>
                     </div>
                 </li>
             </ul>
         </div>
         <div v-show="this.$store.state.foundContent.location.length > 0 && this.$store.state.content.show">
-            <p>Locations</p>
-            <ul>
-                <li class="list-item" v-for="item in this.$store.state.foundContent.location" :key="item.index" :contenteditable="true">
+            <p class="title">Locations</p>
+            <ul class="unordered-list">
+                <li class="list-item" v-for="item in this.$store.state.foundContent.location" :key="item.index">
                     <div class="name-container">
                         {{ item.name }}
                     </div>
                     <div class="button-container">
-                        <button class="content-button" @click="editContent(item)">edit</button>
-                        <button class="content-button">delete</button>
+                        <button class="emoji-button" @click="editContent(item)">✏️</button>
+                        <button class="emoji-button">❌</button>
                     </div>
                 </li>
             </ul>
@@ -58,7 +58,7 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-between;
-        align-items: center;
+        align-items: stretch;
 
         position: absolute;
         bottom: 200px;
@@ -68,9 +68,18 @@
         background-image: radial-gradient(#fff,#d8d8d8);
         border: solid 2px dimgrey;
         border-radius: 1em;
+
+        font-family: var(--font);
+    }
+
+    .unordered-list {
+        padding: 0;
     }
 
     .list-item {
+        width: 100%;
+        min-width: 12em;
+
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
@@ -78,6 +87,9 @@
     }
 
     .name-container {
+        margin-right: 1em;
+
+        float: left;
         display: flex;
         flex-flow: row nowrap;
         justify-content: flex-start;
@@ -91,19 +103,35 @@
         align-items: center;
     }
 
+    .emoji-button {
+        width: 2em;
+        height: 2em;
+
+        outline-style: none;
+        border-style: none;
+        background: none;
+
+        cursor: pointer;
+    }
+
+    .title {
+        text-align: center;g
+    }
+
     .content-button {
         width: 5em;
         height: 2em;
         margin: 0.2em;
 
         outline-style: none;
-        border-radius: 0.4em 0.4em 0.4em 0.4em;
+        border-radius: 0.4em;
         border: 2px solid #d9d9d9;
         background-color: #f2f2f2;
         font-size: 1.3em;
         cursor: pointer;
 
-        font-family: var(--font);
+        align-self: center;
+
     }
 
     .content-button:hover{

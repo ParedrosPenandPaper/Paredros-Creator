@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent class="form-container">
-            <p>Create a new non-player character</p>
+            <p class="title">Create a new non-player character</p>
             <div class="input-container">
                 <label for="name">Name</label>
                 <input class="name-input" v-model="characterName" type="text" id="name" autofocus>
@@ -60,6 +60,10 @@
 <style scoped>
     .form-container {
         font-family: var(--font);
+    }
+
+    .title {
+        text-align: center;
     }
 
     .input-container {
