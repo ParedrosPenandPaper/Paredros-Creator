@@ -115,7 +115,7 @@
     }
 
     .title {
-        text-align: center;g
+        text-align: center;
     }
 
     .content-button {
