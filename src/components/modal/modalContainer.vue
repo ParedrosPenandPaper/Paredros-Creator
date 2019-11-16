@@ -51,6 +51,17 @@
             setPosY() {
                 return this.$store.state.modal.positionY
             }
+        },
+        updated() {
+            if (this.$store.state.modal.type instanceof this.nscType) {
+                document.getElementById("name-npc").focus()
+            }
+            else if (this.$store.state.modal.type instanceof this.locationType) {
+                document.getElementById("name-location").focus()
+            }
+            else if (this.$store.state.content.current) {
+                document.getElementById("name-edit").focus()
+            }
         }
     }
 </script>

@@ -5,8 +5,8 @@
                 <div v-if="key!=='objectID'">
                     <div v-if="key==='name'">
                         <div class="input-container">
-                            <label for="name">Name: </label>
-                            <input class="name-input" type="text" value="content.name" v-model="content.name" id="name">
+                            <label for="name-edit">Name: </label>
+                            <input class="name-input" type="text" value="content.name" v-model="content.name" id="name-edit">
                         </div>
                     </div>
                     <div v-if="key==='text'">

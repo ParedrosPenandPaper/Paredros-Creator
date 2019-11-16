@@ -3,8 +3,8 @@
         <form @submit.prevent class="form-container">
             <p class="title">Create new location</p>
             <div class="input-container">
-                <label for="name">Name</label>
-                <input class="name-input" v-model="locationName" type="text" id="name" autofocus>
+                <label for="name-location">Name</label>
+                <input class="name-input-location" v-model="locationName" type="text" id="name-location">
             </div>
             <div class="input-container">
                 <label for="description">Description</label>
@@ -68,7 +68,7 @@
         align-content: center;
     }
 
-    .name-input {
+    .name-input-location {
         padding: 0.4em;
 
         border-radius: 0.5em;

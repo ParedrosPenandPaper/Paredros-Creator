@@ -3,12 +3,12 @@
         <form @submit.prevent class="form-container">
             <p class="title">Create a new non-player character</p>
             <div class="input-container">
-                <label for="name">Name</label>
-                <input class="name-input" v-model="characterName" type="text" id="name" autofocus>
+                <label for="name-npc">Name</label>
+                <input class="name-input" v-model="characterName" type="text" id="name-npc">
             </div>
             <div class="input-container">
                 <label for="description">Description</label>
-                <textarea class="description-input" v-model="characterDescription" type="text" id="description"
+                <textarea class="description-input" v-model="characterDescription" id="description"
                     rows="4" cols="35" wrap="hard">
                 </textarea>
             </div>
