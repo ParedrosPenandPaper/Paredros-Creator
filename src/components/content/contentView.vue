@@ -1,34 +1,36 @@
 <template>
-    <div class="contentView">
-        <div v-show="this.$store.state.foundContent.npc.length > 0 && this.$store.state.content.show">
-            <p class="title">NPCs</p>
-            <ul class="unordered-list">
-                <li class="list-item" v-for="item in this.$store.state.foundContent.npc" :key="item.index">
-                    <div class="name-container">
-                        {{ item.name }}
-                    </div>
-                    <div class="button-container">
-                        <button class="emoji-button" @click="editContent(item)">✏️</button>
-                        <button class="emoji-button">❌</button>
-                    </div>
-                </li>
-            </ul>
+    <div class="content-mask" v-show="this.$store.state.foundContent.location.length !== 0 || this.$store.state.foundContent.npc.length !== 0">
+        <div class="contentView" v-bind:style="{top: setPosY() + 'px', left: setPosX() + 'px'}">
+            <div v-show="this.$store.state.foundContent.npc.length > 0 && this.$store.state.content.show">
+                <p class="title">NPCs</p>
+                <ul class="unordered-list">
+                    <li class="list-item" v-for="item in this.$store.state.foundContent.npc" :key="item.index">
+                        <div class="name-container">
+                            {{ item.name }}
+                        </div>
+                        <div class="button-container">
+                            <button class="emoji-button" @click="editContent(item)">✏️</button>
+                            <button class="emoji-button">❌</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div v-show="this.$store.state.foundContent.location.length > 0 && this.$store.state.content.show">
+                <p class="title">Locations</p>
+                <ul class="unordered-list">
+                    <li class="list-item" v-for="item in this.$store.state.foundContent.location" :key="item.index">
+                        <div class="name-container">
+                            {{ item.name }}
+                        </div>
+                        <div class="button-container">
+                            <button class="emoji-button" @click="editContent(item)">✏️</button>
+                            <button class="emoji-button">❌</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button class="content-button" @click="closeContent">close</button>
         </div>
-        <div v-show="this.$store.state.foundContent.location.length > 0 && this.$store.state.content.show">
-            <p class="title">Locations</p>
-            <ul class="unordered-list">
-                <li class="list-item" v-for="item in this.$store.state.foundContent.location" :key="item.index">
-                    <div class="name-container">
-                        {{ item.name }}
-                    </div>
-                    <div class="button-container">
-                        <button class="emoji-button" @click="editContent(item)">✏️</button>
-                        <button class="emoji-button">❌</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <button class="content-button" @click="closeContent">close</button>
     </div>
 </template>
 
@@ -48,6 +50,12 @@
             editContent(content) {
                 this.$store.commit('showModal')
                 this.$store.commit('editContent', content)
+            },
+            setPosX() {
+                return this.$store.state.modal.positionX
+            },
+            setPosY() {
+                return this.$store.state.modal.positionY
             }
         }
     }
@@ -61,15 +69,25 @@
         align-items: stretch;
 
         position: absolute;
-        bottom: 200px;
         left: 200px;
         padding: 10px;
-        z-index: 100;
+        z-index: 15;
         background-image: radial-gradient(#fff,#d8d8d8);
         border: solid 2px dimgrey;
         border-radius: 1em;
 
         font-family: var(--font);
+    }
+
+    .content-mask {
+        position: fixed;
+        z-index: 12;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: table;
     }
 
     .unordered-list {

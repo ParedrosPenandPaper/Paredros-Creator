@@ -5,6 +5,7 @@
         <editor id="editor"></editor>
         <modal id="modal-container" v-show="this.$store.state.modal.show"></modal>
         <content-view id="content-view" v-show="this.$store.state.content.show"></content-view>
+        <div class="tree-mask" v-show="this.$store.state.currentDragSelection !== null"></div>
     </div>
 </template>
 
@@ -72,5 +73,16 @@
 
     #modal-container {
 
+    }
+
+    .tree-mask {
+        position: fixed;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: table;
     }
 </style>

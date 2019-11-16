@@ -1,6 +1,6 @@
 <template>
     <div class="menuebar-container">
-        <button class="menu-button">home</button>
+        <button class="menu-button" @click="goToLandingPage">home</button>
         <button class="menu-button" @click="createNewAdventure">new</button>
         <button class="menu-button" @click="loadAdventure">load</button>
         <button class="menu-button" @click="saveAdventure">save</button>
@@ -16,6 +16,9 @@
     export default {
         name: "Menuebar",
         methods: {
+            goToLandingPage() {
+                window.location.href = "http://it-projekt19-6.informatik.fh-nuernberg.de:8082/"
+            },
             createNewAdventure() {
                 this.$store.state.adventureObject = dataElements.blankAdventure()
             },

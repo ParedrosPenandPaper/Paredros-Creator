@@ -202,9 +202,6 @@
                     d3.selectAll('svg g.chapters circle')
                         .on('mouseenter', function () {
                             let chapter = d3.select(this)
-                            vueComponent.$store.commit('findContent', chapter.datum().data.content)
-                            vueComponent.$store.commit('showContent')
-
 
                             tmp = d3.select('svg g.labels')
                                 .append('text')
@@ -220,11 +217,13 @@
                         })
                         .on('contextmenu', function () {
                             d3.event.preventDefault()
-                            alert('do you really want to delete this shit?')
+                            vueComponent.$store.commit('findContent', d3.select(this).datum().data.content)
+                            vueComponent.$store.commit('showContent')
                         })
-                        // TODO: Click to delete function
                         .on('click', function () {
-                            vueComponent.$store.commit('deleteChapter', d3.select(this).datum())
+                            // eslint-disable-next-line no-console
+                            console.log(d3.event)
+                            //vueComponent.$store.commit('deleteChapter', d3.select(this).datum())
                         })
 
 
@@ -250,11 +249,15 @@
                                 // TODO: wahrscheinlich selection Mitgeben um Referenz in den Content abzulegen
                                 // TODO: diese Events sind für scenes und chapter gleich => ggf auslagern
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
-                                    vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
+                                    vueComponent.$store.commit('setDropTarget', d3.select(this).datum())
+                                    let element = document.getElementById('editor').getBoundingClientRect()
+                                    vueComponent.$store.commit('setModalPosition', element)
                                     vueComponent.$store.commit('showModal')
                                 }
                                 if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
-                                    vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
+                                    vueComponent.$store.commit('setDropTarget', d3.select(this).datum())
+                                    let element = document.getElementById('editor').getBoundingClientRect()
+                                    vueComponent.$store.commit('setModalPosition', element)
                                     vueComponent.$store.commit('showModal')
                                 }
                             })
@@ -265,8 +268,7 @@
                         .on('mouseenter', function () {
                             let sceneNode = d3.select(this)
                             let data = sceneNode.data()[0]
-                            vueComponent.$store.commit('findContent', data.path[data.index].content)
-                            vueComponent.$store.commit('showContent')
+
 
                             tmp = d3.select('svg g.labels')
                                 .append('text')
@@ -276,6 +278,13 @@
                                     .attr('dy', data.y)
                                     .attr('font-familiy', 'Segoe UI')
                                     .node()
+                        })
+                        .on('contextmenu', function () {
+                            d3.event.preventDefault()
+                            let sceneNode = d3.select(this)
+                            let data = sceneNode.data()[0]
+                            vueComponent.$store.commit('findContent', data.path[data.index].content)
+                            vueComponent.$store.commit('showContent')
                         })
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
@@ -361,6 +370,7 @@
 </script>
 
 <style scoped>
+
     .tree-renderer-container{
         width: 100%;
         height: 100%;

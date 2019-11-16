@@ -1,6 +1,6 @@
 <template>
     <div class="modalMask">
-        <div class="modal-container">
+        <div class="modal-container" v-bind:style="{top: setPosY() + 'px', left: setPosX() + 'px'}">
             <div class="variable-container" v-show="this.$store.state.modal.type instanceof nscType">
                 <modal-non-player-character></modal-non-player-character>
             </div>
@@ -44,6 +44,12 @@
             },
             declineModal() {
                 this.$store.commit('closeModal', false)
+            },
+            setPosX() {
+                return this.$store.state.modal.positionX
+            },
+            setPosY() {
+                return this.$store.state.modal.positionY
             }
         }
     }
@@ -52,10 +58,8 @@
 <style scoped>
     .modal-container {
         position: absolute;
-        top: 200px;
-        left: 350px;
         padding: 10px;
-        z-index: 100;
+        z-index: 50;
         background-image: radial-gradient(#fff,#d8d8d8);
         border: solid 2px dimgrey;
         border-radius: 1em;
@@ -101,7 +105,7 @@
 
     .modalMask {
         position: fixed;
-        z-index: 50;
+        z-index: 20;
         top: 0;
         left: 0;
         width: 100%;

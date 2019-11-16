@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         adventureObject: {},
-        currentDragSelection: {},
+        currentDragSelection: null,
         currentDropTarget: {
             value: null,
             type: null
@@ -20,7 +20,9 @@ export const store = new Vuex.Store({
         modal: {
             show: false,
             type: null,
-            confirmed: false
+            confirmed: false,
+            positionX: null,
+            positionY: null
         },
         foundContent : {
             npc: [],
@@ -111,6 +113,10 @@ export const store = new Vuex.Store({
                 state.content.current = null
             }
             state.adventureObject = [...state.adventureObject]
+        },
+        setModalPosition(state, positionObject) {
+            state.modal.positionX = Math.round(positionObject.left)
+            state.modal.positionY = Math.round(positionObject.top)
         },
         addContent(state, content) {
             if (state.adventureObject.length < 3) {
