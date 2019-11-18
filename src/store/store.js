@@ -111,8 +111,8 @@ export const store = new Vuex.Store({
                 state.modal.type = null
                 state.currentDropTarget.value = null
                 state.currentDropTarget.type = null
+                state.content.current = null
             }
-            state.content.current = null
             
             state.adventureObject = [...state.adventureObject]
         },
@@ -211,6 +211,8 @@ export const store = new Vuex.Store({
                 state.adventureObject[2].item[foundIndexItem].name = content.name
                 state.adventureObject[2].item[foundIndexItem].text = content.text
             }
+
+            state.content.current = null
         }
     }
 })
