@@ -1,5 +1,5 @@
 <template>
-    <div class="editor-panel" :class="{ 'chapter-panel': storyItem.hasOwnProperty('children'), 'scene-panel': !storyItem.hasOwnProperty('children') }">
+    <div :id="storyItem.title" class="editor-panel" :class="{ 'chapter-panel': storyItem.hasOwnProperty('children'), 'scene-panel': !storyItem.hasOwnProperty('children') }">
         <p :class="{ 'chapter-title': storyItem.hasOwnProperty('children'), 'scene-title': !storyItem.hasOwnProperty('children') }" contenteditable="true" @focusout="testEventTitle" spellcheck="false">{{storyItem.title}}</p>
         <p :class="{ 'chapter-text': storyItem.hasOwnProperty('children'), 'scene-text': !storyItem.hasOwnProperty('children') }" contenteditable="true" @focusout="testEventText" spellcheck="false">{{storyItem.text}}</p>
     </div>

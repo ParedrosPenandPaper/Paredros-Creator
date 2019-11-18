@@ -200,6 +200,7 @@
 
                     // regular events chapter
                     d3.selectAll('svg g.chapters circle')
+                        // show title on hover
                         .on('mouseenter', function () {
                             let chapter = d3.select(this)
 
@@ -215,15 +216,15 @@
                         .on('mouseleave', function () {
                             d3.select(tmp).remove()
                         })
+                        // show the context menu for data content elements
                         .on('contextmenu', function () {
                             d3.event.preventDefault()
                             vueComponent.$store.commit('findContent', d3.select(this).datum().data.content)
                             vueComponent.$store.commit('showContent')
                         })
+                        // scroll to corresponding editor-panel
                         .on('click', function () {
-                            // eslint-disable-next-line no-console
-                            console.log(d3.event)
-                            //vueComponent.$store.commit('deleteChapter', d3.select(this).datum())
+                            window.location.href = '#' + d3.select(this).datum().data.title
                         })
 
 

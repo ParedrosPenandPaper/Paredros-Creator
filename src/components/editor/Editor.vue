@@ -50,7 +50,9 @@
 
 <style scoped>
     .editor-container {
-        overflow-y: scroll;
         padding-right: 8em;
+
+        overflow-y: scroll;
+        scroll-behavior: smooth;
     }
 </style>
