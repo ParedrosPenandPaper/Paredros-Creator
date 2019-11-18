@@ -35,15 +35,9 @@
             handleUpload(changeEvent) {
                 const uploadedFile = changeEvent.target.files[0]
 
-                // eslint-disable-next-line
-                console.log(uploadedFile)
-
                 uploadedFile.text()
                     .then(adventureJson => {
                         const uploadedAdventure = JSON.parse(adventureJson)
-
-                        // eslint-disable-next-line
-                        console.log(uploadedAdventure)
 
                         // TODO:    check if uploaded adventure complies with the scheme of an adventure object
                         //          (no clue how to do that but this is neccessary in order to avoid uploading something that is not an adventure)
