@@ -16,7 +16,7 @@ function blankAdventure(title='newAdventure', author='anonymous') {
 
 export { chapterLabel, Chapter }
 
-const chapterLabel = 'CH';
+const chapterLabel = '📜';
 function Chapter(title='new chapter', children=[], content=[], paths=[], text='lorem ipsum ...') {
     this.title = title
     this.children = children
@@ -27,7 +27,7 @@ function Chapter(title='new chapter', children=[], content=[], paths=[], text='l
 
 export { sceneLabel, Scene }
 
-const sceneLabel = 'SC';
+const sceneLabel = '📃';
 
 function Scene(title='new scene', text='lorem ipsum ...') {
     this.title = title
@@ -36,7 +36,7 @@ function Scene(title='new scene', text='lorem ipsum ...') {
 
 export { characterLabel, Character}
 
-const characterLabel = 'NPC'
+const characterLabel = '💂🏻‍♂'
 
 function Character(name='new character', text='a new npc enters the world', hitPoints=0) {
     this.objectID = ObjectID().toHexString()
@@ -47,9 +47,19 @@ function Character(name='new character', text='a new npc enters the world', hitP
 
 export { locationLabel, Location}
 
-const locationLabel = 'LOC'
+const locationLabel = '🏰'
 
 function Location(name='new location', text='this is a strange site') {
+    this.objectID = ObjectID().toHexString()
+    this.name = name
+    this.text = text
+}
+
+export { itemLabel, Item }
+
+const itemLabel = '🔨'
+
+function Item(name='new item', text='this is a rare item') {
     this.objectID = ObjectID().toHexString()
     this.name = name
     this.text = text

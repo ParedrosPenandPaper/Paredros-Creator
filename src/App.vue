@@ -16,8 +16,6 @@
     import Modal from './components/modal/modalContainer.vue'
     import ContentView from './components/content/contentView.vue'
 
-    //import localDataOne from '../data/example1.json'
-    //import localDataTwo from '../data/example2.json'
     import localDataThree from '../data/example3.json'
 
     export default {

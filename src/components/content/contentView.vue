@@ -29,6 +29,20 @@
                     </li>
                 </ul>
             </div>
+            <div v-show="this.$store.state.foundContent.item.length > 0 && this.$store.state.content.show">
+                <p class="title">Items</p>
+                <ul class="unordered-list">
+                    <li class="list-item" v-for="item in this.$store.state.foundContent.item" :key="item.index">
+                        <div class="name-container">
+                            {{ item.name }}
+                        </div>
+                        <div class="button-container">
+                            <button class="emoji-button" @click="editContent(item)">✏️</button>
+                            <button class="emoji-button">❌</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <button class="content-button" @click="closeContent">close</button>
         </div>
     </div>
@@ -37,11 +51,6 @@
 <script>
     export default {
         name: "contentView.vue",
-        data() {
-            return {
-
-            }
-        },
         methods: {
             closeContent() {
                 this.$store.commit('hideContent')

@@ -1,19 +1,26 @@
 <template>
     <div class="modalMask">
         <div class="modal-container" v-bind:style="{top: setPosY() + 'px', left: setPosX() + 'px'}">
+
             <div class="variable-container" v-show="this.$store.state.modal.type instanceof nscType">
                 <modal-non-player-character></modal-non-player-character>
             </div>
             <div class="variable-container" v-show="this.$store.state.modal.type instanceof locationType">
                 <modal-location></modal-location>
             </div>
+            <div class="variable-container" v-show="this.$store.state.modal.type instanceof itemType">
+                <modal-item></modal-item>
+            </div>
+
             <div class="variable-container" v-show="this.$store.state.content.current">
                 <modal-edit-content></modal-edit-content>
             </div>
+
             <div class="button-container">
-                <input class="modal-button" type="submit" @click="declineModal()" value="cancel">
-                <input class="modal-button" type="submit" @click="confirmModal()" value="confirm">
+                <button class="modal-button" @click="declineModal" >cancel</button>
+                <button class="modal-button" @click="confirmModal" >confirm</button>
             </div>
+
         </div>
     </div>
 </template>
@@ -21,6 +28,7 @@
 <script>
     import modalNonPlayerCharacter from './modalNonPlayerCharacter.vue'
     import modalLocation from './modalLocation.vue'
+    import modalItem from './modalItem.vue'
     import modalEditContent from "./modalEditContent.vue";
 
     import * as dataElements from "../../util/DataElements";
@@ -30,12 +38,14 @@
         data() {
             return {
                 nscType: dataElements.Character,
-                locationType: dataElements.Location
+                locationType: dataElements.Location,
+                itemType: dataElements.Item
             }
         },
         components: {
             modalNonPlayerCharacter,
             modalLocation,
+            modalItem,
             modalEditContent
         },
         methods: {
@@ -58,6 +68,9 @@
             }
             else if (this.$store.state.modal.type instanceof this.locationType) {
                 document.getElementById("name-location").focus()
+            }
+            else if (this.$store.state.modal.type instanceof this.itemType){
+                document.getElementById("name-item").focus()
             }
             else if (this.$store.state.content.current) {
                 document.getElementById("name-edit").focus()

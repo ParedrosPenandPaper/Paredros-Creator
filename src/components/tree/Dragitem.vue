@@ -19,7 +19,7 @@
                 ev.dataTransfer.setData('text', 'dataTransfer')
                 ev.dataTransfer.dropEffect = 'link'
                 ev.dataTransfer.effectAllowed = 'link'
-                this.$store.commit('setDragSelection', new this.template.constructor('new story item'))
+                this.$store.commit('setDragSelection', new this.template.constructor())
             }
         }
     }

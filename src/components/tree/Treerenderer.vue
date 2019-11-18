@@ -261,6 +261,12 @@
                                     vueComponent.$store.commit('setModalPosition', element)
                                     vueComponent.$store.commit('showModal')
                                 }
+                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Item){
+                                    vueComponent.$store.commit('setDropTarget', d3.select(this).datum())
+                                    let element = document.getElementById('editor').getBoundingClientRect()
+                                    vueComponent.$store.commit('setModalPosition', element)
+                                    vueComponent.$store.commit('showModal')
+                                }
                             })
 
 

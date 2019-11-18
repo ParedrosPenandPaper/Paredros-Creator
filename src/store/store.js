@@ -26,7 +26,8 @@ export const store = new Vuex.Store({
         },
         foundContent : {
             npc: [],
-            location: []
+            location: [],
+            item: []
         },
         content: {
             show: false,
@@ -110,8 +111,9 @@ export const store = new Vuex.Store({
                 state.modal.type = null
                 state.currentDropTarget.value = null
                 state.currentDropTarget.type = null
-                state.content.current = null
             }
+            state.content.current = null
+            
             state.adventureObject = [...state.adventureObject]
         },
         setModalPosition(state, positionObject) {
@@ -122,7 +124,8 @@ export const store = new Vuex.Store({
             if (state.adventureObject.length < 3) {
                 let emptyContentObject = {
                     character: [],
-                    location: []
+                    location: [],
+                    item: []
                 }
                 state.adventureObject.push(emptyContentObject)
             }
@@ -131,6 +134,9 @@ export const store = new Vuex.Store({
             }
             else if (content instanceof dataElements.Location) {
                 state.adventureObject[2].location.push(content)
+            }
+            else if (content instanceof dataElements.Item) {
+                state.adventureObject[2].item.push(content)
             }
             // überprüfen ob Content Array vorhanden ist, falls nicht neues erzeugen
             if (state.currentDropTarget.type instanceof dataElements.Scene && !state.currentDropTarget.value.content) {
@@ -162,14 +168,23 @@ export const store = new Vuex.Store({
                         }
                     }
                 }
+                if (state.adventureObject[2].item) {
+                    for (let i = 0; i < keyArray.length; i++) {
+                        let foundItem = state.adventureObject[2].item.find(x => x.objectID === keyArray[i])
+                        if (foundItem) {
+                            state.foundContent.item.push(foundItem)
+                        }
+                    }
+                }
             }
         },
         resetFoundContent(state) {
             state.foundContent.npc = []
             state.foundContent.location = []
+            state.foundContent.item = []
         },
         showContent(state) {
-            if(!state.content.show && (state.foundContent.npc.length > 0 || state.foundContent.location.length > 0)) {
+            if(!state.content.show && (state.foundContent.npc.length > 0 || state.foundContent.location.length > 0 || state.foundContent.item.length > 0)) {
                 state.content.show = true;
             }
         },
@@ -191,9 +206,11 @@ export const store = new Vuex.Store({
                 state.adventureObject[2].location[foundIndexLocation].name = content.name
                 state.adventureObject[2].location[foundIndexLocation].text = content.text
             }
+            let foundIndexItem = state.adventureObject[2].item.findIndex(x => x.objectID === state.content.current.objectID)
+            if (foundIndexItem !== -1) {
+                state.adventureObject[2].item[foundIndexItem].name = content.name
+                state.adventureObject[2].item[foundIndexItem].text = content.text
+            }
         }
-    },
-    actions: {
-
     }
 })

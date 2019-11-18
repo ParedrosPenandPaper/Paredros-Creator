@@ -1,9 +1,6 @@
 <template>
     <div class="drag-zone-container">
         <drag-item v-for="(item,index) in dragItems" :key="index" :template="item"></drag-item>
-        <!---<drag-item :template="'CHAR'"></drag-item>
-        <drag-item :template="'LOC'"></drag-item>
-        <drag-item :template="'ITEM'"></drag-item>--->
     </div>
 </template>
 
@@ -29,6 +26,10 @@
                 {
                     label: dataElements.locationLabel,
                     constructor: dataElements.Location
+                },
+                {
+                    label: dataElements.itemLabel,
+                    constructor: dataElements.Item
                 }]
             }
         },
