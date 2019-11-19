@@ -77,7 +77,7 @@
 
         outline-style: none;
         border-radius: 0 0 0.6em 0.6em;
-        border: 2px solid #d9d9d9;
+        border: 2px solid #b9b9b9;
         border-top: none;
         background-color: #f2f2f2;
         font-size: 1.3em;

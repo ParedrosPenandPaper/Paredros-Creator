@@ -224,7 +224,12 @@
                         })
                         // scroll to corresponding editor-panel
                         .on('click', function () {
-                            window.location.href = '#' + d3.select(this).datum().data.title
+                            const chapterId = d3.select(this).datum().data.title
+                            const panel = document.getElementById(chapterId)
+                            const title = panel.getElementsByTagName('p')[0]
+
+                            window.location.href = '#' + chapterId
+                            title.focus()
                         })
 
 
