@@ -20,7 +20,7 @@
                 window.location.href = "http://it-projekt19-6.informatik.fh-nuernberg.de:8082/"
             },
             createNewAdventure() {
-                this.$store.state.adventureObject = dataElements.blankAdventure()
+                this.$store.state.adventureObject = dataElements.Adventure()
             },
             loadAdventure() {
                 alert("Not implemented yet")

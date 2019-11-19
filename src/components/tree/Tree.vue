@@ -17,7 +17,7 @@
         methods: {
             setBackground() {
                 if (this.$store.state.currentDragSelection !== null) {
-                    return "background-image: radial-gradient(#fff,#d8d8d8)"
+                    return `background-image: radial-gradient(#fff,#d8d8d8);`
                 }
                 return null
             }
