@@ -1,17 +1,21 @@
 var ObjectID = require("bson-objectid")
 
-export {blankAdventure}
+export {Adventure}
 
-function blankAdventure(title='newAdventure', author='anonymous') {
-    return [
-        // TODO: outsource into own class
+function Adventure(title='newAdventure', author='anonymous') {
+    this._id  = ObjectID().toHexString()
+    this.meta = 
         {
-            adventure: title,
+            title: title,
             creationDate: new Date(),
             author: author
-        }, 
-        new Chapter()
-    ]
+        }
+    this.story = new Chapter()
+    this.data  = {
+        characters: [],
+        locations:  [],
+        items:      []
+    }
 }
 
 export { chapterLabel, Chapter }
