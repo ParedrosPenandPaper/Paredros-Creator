@@ -15,12 +15,12 @@
 <script>
     import * as d3 from 'd3'
     import * as math from '../../util/Vectormath.js'
-    import * as dataElements from "../../util/DataElements";
+    import * as DataElements from "../../util/DataElements";
 
     export default {
         computed: {
             adventure() {
-                return this.$store.state.adventureObject[1]
+                return this.$store.state.adventureObject.story
             }
         },
         mounted() {
@@ -191,7 +191,7 @@
                 }
 
                 function addEventHandlers(){
-                    let tmp
+                    let labelSelection
 
                     d3.select(window)
                         .on('dragend', function () {
@@ -204,7 +204,7 @@
                         .on('mouseenter', function () {
                             let chapter = d3.select(this)
 
-                            tmp = d3.select('svg g.labels')
+                            labelSelection = d3.select('svg g.labels')
                                 .append('text')
                                 .classed('label', true)
                                 .text(chapter.datum().data.title)
@@ -214,7 +214,7 @@
                                     .node()
                         })
                         .on('mouseleave', function () {
-                            d3.select(tmp).remove()
+                            d3.select(labelSelection).remove()
                         })
                         // show the context menu for data content elements
                         .on('contextmenu', function () {
@@ -244,34 +244,26 @@
                                     .attr('r', chapterRadius)
                             })
                             .on('drop', function () {
+                                let dragSelection = vueComponent.$store.state.currentDragSelection
                                 // TODO: Da es jetzt die Selection im store gibt die chapter/scene events bei zeiten refactoren
-                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Chapter) {
-                                    vueComponent.$store.commit('addChapterAfter', d3.select(this).data()[0].data)
-                                    vueComponent.renderTree()
+                                if (dragSelection instanceof DataElements.Chapter) {
+                                    vueComponent.$store.commit('addChapterAfter', d3.select(this).datum().data)
                                 }
-                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
+                                if (dragSelection instanceof DataElements.Scene) {
                                     vueComponent.$store.commit('addSceneAfterChapter', d3.select(this).datum())
                                 }
                                 // TODO: wahrscheinlich selection Mitgeben um Referenz in den Content abzulegen
                                 // TODO: diese Events sind für scenes und chapter gleich => ggf auslagern
-                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
+                                if (dragSelection instanceof DataElements.Character
+                                    || dragSelection instanceof DataElements.Location
+                                    || dragSelection instanceof DataElements.Item){
                                     vueComponent.$store.commit('setDropTarget', d3.select(this).datum())
                                     let element = document.getElementById('editor').getBoundingClientRect()
                                     vueComponent.$store.commit('setModalPosition', element)
                                     vueComponent.$store.commit('showModal')
                                 }
-                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
-                                    vueComponent.$store.commit('setDropTarget', d3.select(this).datum())
-                                    let element = document.getElementById('editor').getBoundingClientRect()
-                                    vueComponent.$store.commit('setModalPosition', element)
-                                    vueComponent.$store.commit('showModal')
-                                }
-                                if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Item){
-                                    vueComponent.$store.commit('setDropTarget', d3.select(this).datum())
-                                    let element = document.getElementById('editor').getBoundingClientRect()
-                                    vueComponent.$store.commit('setModalPosition', element)
-                                    vueComponent.$store.commit('showModal')
-                                }
+                                d3.select(this)
+                                    .attr('r', chapterRadius)
                             })
 
 
@@ -282,7 +274,7 @@
                             let data = sceneNode.data()[0]
 
 
-                            tmp = d3.select('svg g.labels')
+                            labelSelection = d3.select('svg g.labels')
                                 .append('text')
                                 .classed('label', true)
                                 .text(data.path[data.index].title)
@@ -299,7 +291,7 @@
                             vueComponent.$store.commit('showContent')
                         })
                         .on('mouseleave', function () {
-                            d3.select(tmp).remove()
+                            d3.select(labelSelection).remove()
                         })
 
                     // drag events scenes
@@ -313,18 +305,21 @@
                                 .attr('r', sceneRadius)
                         })
                         .on('drop', function () {
-                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Scene) {
+                            let dragSelection = vueComponent.$store.state.currentDragSelection
+                            if (dragSelection instanceof DataElements.Scene) {
                                 vueComponent.$store.commit('addSceneAfter', d3.select(this).datum())
                                 vueComponent.renderTree()
                             }
-                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Character){
-                                vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
+                            if (dragSelection instanceof DataElements.Character
+                                || dragSelection instanceof DataElements.Location
+                                || dragSelection instanceof DataElements.Item){
+                                vueComponent.$store.commit('setDropTarget', d3.select(this).datum())
+                                let element = document.getElementById('editor').getBoundingClientRect()
+                                vueComponent.$store.commit('setModalPosition', element)
                                 vueComponent.$store.commit('showModal')
                             }
-                            if (vueComponent.$store.state.currentDragSelection instanceof dataElements.Location){
-                                vueComponent.$store.commit("setDropTarget", d3.select(this).datum())
-                                vueComponent.$store.commit('showModal')
-                            }
+                            d3.select(this)
+                                .attr('r', sceneRadius)
                         })
                 }
 
@@ -373,8 +368,11 @@
             }
         },
         watch: {
-            adventure() {
-                this.renderTree()
+            adventure: {
+                handler() {
+                    this.renderTree()
+                },
+                deep: true
             }
         }
     }

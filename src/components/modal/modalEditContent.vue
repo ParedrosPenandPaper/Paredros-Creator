@@ -2,7 +2,7 @@
     <div>
         <form @submit.prevent class="form-container">
             <div v-for="(value, key) in this.$store.state.content.current" :key="key">
-                <div v-if="key!=='objectID'">
+                <div v-if="key!=='_id'">
                     <div v-if="key==='name'">
                         <div class="input-container">
                             <label for="name-edit">Name: </label>

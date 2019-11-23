@@ -16,7 +16,7 @@
     import Modal from './components/modal/modalContainer.vue'
     import ContentView from './components/content/contentView.vue'
 
-    import localDataThree from '../data/example3.json'
+    import localDataFour from '../data/example4.json'
 
     export default {
         name: 'app',
@@ -36,7 +36,7 @@
             
         },
         mounted() {
-            this.$store.commit('setAdventureObject', localDataThree)            
+            this.$store.commit('setAdventureObject', localDataFour)
         }
     }
 </script>

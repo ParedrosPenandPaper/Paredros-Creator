@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import * as dataElements from '../../util/DataElements.js'
+    import * as DataElements from '../../util/DataElements.js'
 
     export default {
         name: "modalNonPlayerCharacter",
@@ -34,7 +34,7 @@
         },
         methods: {
             addNewNonPlayerCharacter() {
-                let nonPlayerCharacter = new dataElements.Character(this.characterName, this.characterDescription,
+                let nonPlayerCharacter = new DataElements.Character(this.characterName, this.characterDescription,
                     this.characterHitPoints)
                 this.$store.commit("addContent", nonPlayerCharacter)
             },
@@ -47,7 +47,7 @@
         created() {
             this.$store.subscribe((mutation, state) => {
                 if (mutation.type === "closeModal" && state.modal.confirmed
-                    && this.$store.state.modal.type instanceof dataElements.Character) {
+                    && this.$store.state.modal.type instanceof DataElements.Character) {
                     this.addNewNonPlayerCharacter()
                 }
                 this.resetInputs()

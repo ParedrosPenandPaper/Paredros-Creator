@@ -1,10 +1,10 @@
 <template>
-    <div class="content-mask" v-show="this.$store.state.foundContent.location.length !== 0 || this.$store.state.foundContent.npc.length !== 0">
+    <div class="content-mask">
         <div class="contentView" v-bind:style="{top: setPosY() + 'px', left: setPosX() + 'px'}">
-            <div v-show="this.$store.state.foundContent.npc.length > 0 && this.$store.state.content.show">
+            <div v-show="this.$store.state.foundContent.characters.length > 0">
                 <p class="title">NPCs</p>
                 <ul class="unordered-list">
-                    <li class="list-item" v-for="item in this.$store.state.foundContent.npc" :key="item.index">
+                    <li class="list-item" v-for="item in this.$store.state.foundContent.characters" :key="item.index">
                         <div class="name-container">
                             {{ item.name }}
                         </div>
@@ -15,10 +15,10 @@
                     </li>
                 </ul>
             </div>
-            <div v-show="this.$store.state.foundContent.location.length > 0 && this.$store.state.content.show">
+            <div v-show="this.$store.state.foundContent.locations.length > 0">
                 <p class="title">Locations</p>
                 <ul class="unordered-list">
-                    <li class="list-item" v-for="item in this.$store.state.foundContent.location" :key="item.index">
+                    <li class="list-item" v-for="item in this.$store.state.foundContent.locations" :key="item.index">
                         <div class="name-container">
                             {{ item.name }}
                         </div>
@@ -29,10 +29,10 @@
                     </li>
                 </ul>
             </div>
-            <div v-show="this.$store.state.foundContent.item.length > 0 && this.$store.state.content.show">
+            <div v-show="this.$store.state.foundContent.items.length > 0">
                 <p class="title">Items</p>
                 <ul class="unordered-list">
-                    <li class="list-item" v-for="item in this.$store.state.foundContent.item" :key="item.index">
+                    <li class="list-item" v-for="item in this.$store.state.foundContent.items" :key="item.index">
                         <div class="name-container">
                             {{ item.name }}
                         </div>

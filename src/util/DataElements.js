@@ -1,4 +1,4 @@
-var ObjectID = require("bson-objectid")
+const ObjectID = require("bson-objectid")
 
 export {Adventure}
 
@@ -33,17 +33,18 @@ export { sceneLabel, Scene }
 
 const sceneLabel = '📃';
 
-function Scene(title='new scene', text='lorem ipsum ...') {
+function Scene(title='new scene', text='lorem ipsum ...', content=[]) {
     this.title = title
     this.text = text
+    this.content = content
 }
 
 export { characterLabel, Character}
 
-const characterLabel = '💂🏻‍♂'
+const characterLabel = '👤'//'💂🏻‍♂'
 
 function Character(name='new character', text='a new npc enters the world', hitPoints=0) {
-    this.objectID = ObjectID().toHexString()
+    this._id = ObjectID().toHexString()
     this.name = name
     this.text = text
     this.hitPoints = hitPoints
@@ -54,17 +55,17 @@ export { locationLabel, Location}
 const locationLabel = '🏰'
 
 function Location(name='new location', text='this is a strange site') {
-    this.objectID = ObjectID().toHexString()
+    this._id = ObjectID().toHexString()
     this.name = name
     this.text = text
 }
 
 export { itemLabel, Item }
 
-const itemLabel = '🔨'
+const itemLabel = '🗝️️️'
 
 function Item(name='new item', text='this is a rare item') {
-    this.objectID = ObjectID().toHexString()
+    this._id = ObjectID().toHexString()
     this.name = name
     this.text = text
 }

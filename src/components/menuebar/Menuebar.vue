@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import * as dataElements from "../../util/DataElements";
+    import * as DataElements from "../../util/DataElements";
 
     export default {
         name: "Menuebar",
@@ -20,7 +20,8 @@
                 window.location.href = "http://it-projekt19-6.informatik.fh-nuernberg.de:8082/"
             },
             createNewAdventure() {
-                this.$store.state.adventureObject = dataElements.Adventure()
+                const newAdventure = new DataElements.Adventure()
+                this.$store.commit('setAdventureObject', newAdventure)
             },
             loadAdventure() {
                 alert("Not implemented yet")

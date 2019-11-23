@@ -31,15 +31,15 @@
     import modalItem from './modalItem.vue'
     import modalEditContent from "./modalEditContent.vue";
 
-    import * as dataElements from "../../util/DataElements";
+    import * as DataElements from "../../util/DataElements";
 
     export default {
         name: "modalContainer",
         data() {
             return {
-                nscType: dataElements.Character,
-                locationType: dataElements.Location,
-                itemType: dataElements.Item
+                nscType: DataElements.Character,
+                locationType: DataElements.Location,
+                itemType: DataElements.Item
             }
         },
         components: {

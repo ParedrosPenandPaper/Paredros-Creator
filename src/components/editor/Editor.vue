@@ -20,13 +20,17 @@
         },
         computed: {
             adventure() {
-                return this.$store.state.adventureObject[1]
+                return this.$store.state.adventureObject.story
             }
         },
         watch: {
-            adventure(newValue){
-                this.storyItems = flattenAdventureRecursively(newValue, new Array())
+            adventure: {
+                handler(newValue){
+                    this.storyItems = flattenAdventureRecursively(newValue, [])
+                },
+                deep: true
             }
+
         }
     }
 

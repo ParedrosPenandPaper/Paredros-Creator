@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    // import * as DataElements from '../../util/DataElements.js'
+    import * as DataElements from '../../util/DataElements.js'
 
     export default {
         props:{
@@ -33,16 +33,11 @@
                 const itemContainer = mouseenterEvent.target
                 const labelText = itemContainer.firstChild.textContent
 
-                // eslint-disable-next-line
-                console.log(itemContainer)
-                // eslint-disable-next-line
-                console.log(labelText)
-
-                if (labelText.includes('📜')) this.tooltip = 'chapter' 
-                else if (labelText.includes('📃')) this.tooltip = 'scene' 
-                else if (labelText.includes('💂🏻‍♂')) this.tooltip = 'npc' 
-                else if (labelText.includes('🏰')) this.tooltip = 'location' 
-                else if (labelText.includes('🔨')) this.tooltip = 'item'
+                if (labelText.includes(DataElements.chapterLabel)) this.tooltip = 'chapter'
+                else if (labelText.includes(DataElements.sceneLabel)) this.tooltip = 'scene'
+                else if (labelText.includes(DataElements.characterLabel)) this.tooltip = 'npc'
+                else if (labelText.includes(DataElements.locationLabel)) this.tooltip = 'location'
+                else if (labelText.includes(DataElements.itemLabel)) this.tooltip = 'item'
                 else this.tooltip = 'tooltip'
 
                 itemContainer.lastChild.style = 'display: block;'
@@ -75,6 +70,7 @@
     }
 
     .tooltip{
+        display: none;
         width: 100%;
         padding-top: 5px;
 
