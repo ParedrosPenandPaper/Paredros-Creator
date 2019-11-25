@@ -50,7 +50,7 @@
                 let element = document.createElement('a');
                 element.setAttribute('href', 'data:text/plain;charset=utf-u,'
                     +encodeURIComponent(JSON.stringify(this.$store.state.adventureObject)));
-                element.setAttribute('download', this.$store.state.adventureObject[0].adventure + ".json");
+                element.setAttribute('download', this.$store.state.adventureObject.meta.title + ".json");
                 element.click()
             }
         }
